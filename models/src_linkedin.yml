@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: linkedin
+    schema: "{{ var('linkedin_schema', 'linkedin_ads') }}"
+    database: "{{ var('linkedin_database', target.database) }}"
+
+    loader: Fivetran
+    loaded_at_field: _fivetran_synced
+
+    tables:
+      - name: ad_analytics_by_creative
+      - name: creative_history
+      - name: campaign_history
+      - name: campaign_group_history
+      - name: account_history

@@ -1,0 +1,65 @@
+version: 2
+
+models:
+
+  - name: stg_linkedin__ad_analytics_by_creative
+    columns:
+      - name: daily_creative_id
+        tests:
+          - unique
+          - not_null
+      - name: creative_id
+        tests:
+          - not_null
+
+  - name: stg_linkedin__creative_history
+    columns:
+      - name: creative_version_id
+        tests:
+          - unique
+          - not_null
+      - name: creative_id
+        tests:
+          - not_null
+      - name: valid_from
+        tests:
+          - not_null
+
+  - name: stg_linkedin__campaign_history
+    columns:
+      - name: campaign_version_id
+        tests:
+          - unique
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: valid_from
+        tests:
+          - not_null
+
+  - name: stg_linkedin__campaign_group_history
+    columns:
+      - name: campaign_group_version_id
+        tests:
+          - unique
+          - not_null
+      - name: campaign_group_id
+        tests:
+          - not_null
+      - name: valid_from
+        tests:
+          - not_null
+
+  - name: stg_linkedin__account_history
+    columns:
+      - name: account_version_id
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        tests:
+          - not_null
+      - name: valid_from
+        tests:
+          - not_null
