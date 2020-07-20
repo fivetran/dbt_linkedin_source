@@ -1,0 +1,1 @@
+SELECT * FROM `dbt-package-testing.linkedin_ads.fivetran_audit` LIMIT 1000
