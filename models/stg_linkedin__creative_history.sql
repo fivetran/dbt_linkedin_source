@@ -11,7 +11,7 @@ with base as (
         created_time as created_at,
         campaign_id,
         type as creative_type,
-        version_tag,
+        cast(version_tag as INT64) as version_tag,
         status as creative_status,
         call_to_action_target,
         click_uri

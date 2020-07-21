@@ -11,7 +11,7 @@ with base as (
         created_time as created_at,
         name as account_name,
         currency,
-        version_tag
+        cast(version_tag as INT64) as version_tag
     from base
 
 ), valid_dates as (
