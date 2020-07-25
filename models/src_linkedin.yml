@@ -10,7 +10,128 @@ sources:
 
     tables:
       - name: ad_analytics_by_creative
+        description: Each record in this table represents the daily performance of ads at the creative level.
+        columns:
+          - name: creative_id
+            description: The ID of the related creative.
+
+          - name: day
+            description: The day of the activity.
+
+          - name: clicks
+            description: The count of chargeable clicks.
+
+          - name: impressions
+            description: This is the count of "impressions" for Direct Ads and Sponsored Updates and "sends" for InMails.
+
+          - name: cost_in_local_currency
+            description: The cost of the ads in the local currency.
+
+          - name: cost_in_usd
+            description: The cost of the ads in the USD.
+
       - name: creative_history
+        description: Each recor represents a 'version' of a creative.
+        columns:
+          - name: id
+            description: Unique internal ID representing the creative.
+
+          - name: last_modified_time
+            description: The timestamp of when the version was updated.
+
+          - name: created_time
+            description: The timestamp of when the creative was created.
+
+          - name: campaign_id
+            description: The ID of the campaign the creative belongs to.
+
+          - name: status
+            description: |
+                ACTIVE - Creative creation is complete and creative is available for review and serve.
+                PAUSED - Creative creation is complete and creative is current, but should temporarily not be served. This status is not valid upon creation.
+                DRAFT - Creative creation is incomplete and may still be edited.
+                ARCHIVED - Creative creation is complete, but creative should not be served and should be separated from non-archived creatives in any UI.
+                CANCELED - Creative is permanently canceled.
+
+          - name: version_tag
+            description: An integer representation of the version of the creative.
+
+          - name: type 
+            description: |
+                TEXT_AD - Text with Sponsored Link to landing page on your site.
+                SPONSORED_STATUS_UPDATE - Sponsored status update from a profile page.
+                SPONSORED_INMAILS - Single message ad delivered to the member's inbox
+                SPONSORED_MESSAGE - Conversation ad containing a tree of pre-determined messages delivered to the member's inbox
+                SPONSORED_VIDEO - Sponsored videos.
+                SPONSORED_UPDATE_CAROUSEL - Sponsored Carousels
+                FOLLOW_COMPANY_V2 - Dynamic Follow Ad
+                SPOTLIGHT_V2 - Dynamic Spotlight Ad
+                JOBS_V2 - Dynamic Job Ad
+
+          - name: click_uri
+            description: |
+                Required when creative type is TEXT_AD. Maximum character limit of 500 after URL encoding all special characters. 
+                Limit does not include the "https://" prefix.
+
       - name: campaign_history
+        description: Each record represents a 'version' of a campaign.
+        columns:
+          - name: id
+            description: Unique internal ID representing the campaign.
+              
+          - name: last_modified_time
+            description: The timestamp of when the version was updated.
+              
+          - name: account_id
+            description: The ID of the account the campaign belongs to.
+              
+          - name: campaign_group_id
+            description: The ID of the campaign group the campaign belongs to.
+              
+          - name: created_time
+            description: The timestamp of when the campaign was created.
+              
+          - name: name
+            description: A label for the campaign.
+              
+          - name: version_tag
+            description: An integer representation of the version of the campaign.
+              
       - name: campaign_group_history
+        description: Each record represents a 'version' of a campaign group.
+        columns:
+          - name: id
+            description: Unique internal ID representing the campaign group.
+            
+          - name: last_modified_time
+            description: The timestamp of when the version was updated.
+            
+          - name: account_id
+            description: The ID of the account the campaign group belongs to.
+            
+          - name: created_time
+            description: The timestamp of when the campaign group was created.
+            
+          - name: name
+            description: A label for the campaign group.
+            
       - name: account_history
+        description: Each record represents a 'version' of an account. 
+        columns:
+          - name: id
+            description: Unique internal ID representing the account.
+
+          - name: last_modified_time
+            description: The timestamp of when the version was updated.
+
+          - name: created_time
+            description: The timestamp of when the account was created.
+
+          - name: name
+            description: A label for the account.
+
+          - name: currency
+            description: The ISO 4217 currency code of the account, such as 'USD' for United States Dollar.
+
+          - name: version_tag
+            description: An integer representation of the version of the account.

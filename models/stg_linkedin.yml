@@ -5,61 +5,214 @@ models:
   - name: stg_linkedin__ad_analytics_by_creative
     columns:
       - name: daily_creative_id
+        description: A unique key, a combination of creative_id and date_day.
         tests:
           - unique
           - not_null
+
       - name: creative_id
+        description: The ID of the related creative.
         tests:
           - not_null
+
+      - name: date_day
+        description: The day of the activity.
+
+      - name: clicks
+        description: The count of chargeable clicks.
+
+      - name: impressions
+        description: This is the count of "impressions" for Direct Ads and Sponsored Updates and "sends" for InMails.
+
+      - name: cost
+        description: The cost of the ads in the local currency or USD.
 
   - name: stg_linkedin__creative_history
     columns:
       - name: creative_version_id
+        description: A unique key, a combination of creative_id and version_tag.
         tests:
           - unique
           - not_null
+          
       - name: creative_id
+        description: Unique internal ID representing the creative.
         tests:
           - not_null
+
       - name: valid_from
+        description: The timestamp the version is valid from.
         tests:
           - not_null
+
+      - name: valid_to
+        description: The timestamp the version is valid to, null if record is still active.
+
+      - name: last_modified_at
+        description: The timestamp of when the version was updated.
+
+      - name: created_at
+        description: The timestamp of when the creative was created.
+
+      - name: campaign_id
+        description: The ID of the campaign the creative belongs to.
+
+      - name: creative_type
+        description: |
+          TEXT_AD - Text with Sponsored Link to landing page on your site.
+          SPONSORED_STATUS_UPDATE - Sponsored status update from a profile page.
+          SPONSORED_INMAILS - Single message ad delivered to the member's inbox
+          SPONSORED_MESSAGE - Conversation ad containing a tree of pre-determined messages delivered to the member's inbox
+          SPONSORED_VIDEO - Sponsored videos.
+          SPONSORED_UPDATE_CAROUSEL - Sponsored Carousels
+          FOLLOW_COMPANY_V2 - Dynamic Follow Ad
+          SPOTLIGHT_V2 - Dynamic Spotlight Ad
+          JOBS_V2 - Dynamic Job Ad
+
+      - name: version_tag
+        description: An integer representation of the version of the creative.
+
+      - name: creative_status
+        description: |
+          ACTIVE - Creative creation is complete and creative is available for review and serve.
+          PAUSED - Creative creation is complete and creative is current, but should temporarily not be served. This status is not valid upon creation.
+          DRAFT - Creative creation is incomplete and may still be edited.
+          ARCHIVED - Creative creation is complete, but creative should not be served and should be separated from non-archived creatives in any UI.
+          CANCELED - Creative is permanently canceled.
+
+      - name: click_uri
+        description: |
+          Required when creative type is TEXT_AD. Maximum character limit of 500 after URL encoding all special characters. 
+          Limit does not include the "https://" prefix.
+
+      - name: base_url
+        description: The base URL of the ad, extracted from the `click_uri`.
+
+      - name: url_host
+        description: The URL host of the ad, extracted from the `click_uri`.
+
+      - name: url_path
+        description: The URL path of the ad, extracted from the `click_uri`.
+
+      - name: utm_source
+        description: The utm_source parameter of the ad, extracted from the `click_uri`.
+
+      - name: utm_medium
+        description: The utm_medium parameter of the ad, extracted from the `click_uri`.
+
+      - name: utm_campaign
+        description: The utm_campaign parameter of the ad, extracted from the `click_uri`.
+
+      - name: utm_content
+        description: The utm_content parameter of the ad, extracted from the `click_uri`.
+
+      - name: utm_term
+        description: The utm_term parameter of the ad, extracted from the `click_uri`.
 
   - name: stg_linkedin__campaign_history
     columns:
       - name: campaign_version_id
+        description: A unique key, a combination of campaign_id and version_tag.
         tests:
           - unique
           - not_null
+
       - name: campaign_id
+        description: Unique internal ID representing the campaign.
         tests:
           - not_null
+
       - name: valid_from
+        description: The timestamp the version is valid from.
         tests:
           - not_null
+
+      - name: last_modified_at
+        description: The timestamp of when the version was updated.
+
+      - name: account_id
+        description: The ID of the account the campaign belongs to.
+
+      - name: campaign_group_id
+        description: The ID of the campaign group the campaign belongs to.
+
+      - name: created_at
+        description: The timestamp of when the campaign was created.
+
+      - name: campaign_name
+        description: A label for the campaign.
+
+      - name: version_tag
+        description: An integer representation of the version of the campaign.
+
+      - name: valid_to
+        description: The timestamp the version is valid to, null if record is still active.
 
   - name: stg_linkedin__campaign_group_history
     columns:
       - name: campaign_group_version_id
+        description: A unique key, a combination of campaign_group_id and last_modified_at.
         tests:
           - unique
           - not_null
+
       - name: campaign_group_id
-        tests:
-          - not_null
-      - name: valid_from
+        description: Unique internal ID representing the campaign group.
         tests:
           - not_null
 
+      - name: valid_from
+        description: The timestamp the version is valid from.
+        tests:
+          - not_null
+
+      - name: last_modified_at
+        description: The timestamp of when the version was updated.
+          
+      - name: account_id
+        description: The ID of the account the campaign group belongs to.
+          
+      - name: created_at
+        description: The timestamp of when the campaign group was created.
+          
+      - name: campaign_group_name
+        description: A label for the campaign group.
+          
+      - name: valid_to
+        description: The timestamp the version is valid to, null if record is still active.
+          
   - name: stg_linkedin__account_history
     columns:
       - name: account_version_id
+        description: A unique key, a combination of account_id and version_tag.
         tests:
           - unique
           - not_null
+
       - name: account_id
+        description: Unique internal ID representing the account.
         tests:
           - not_null
+
       - name: valid_from
+        description: The timestamp the version is valid from.
         tests:
           - not_null
+
+      - name: last_modified_at
+        description: The timestamp of when the version was updated.
+
+      - name: created_at
+        description: The timestamp of when the account was created.
+
+      - name: account_name
+        description: A label for the account.
+
+      - name: currency
+        description: The ISO 4217 currency code of the account, such as 'USD' for United States Dollar.
+
+      - name: version_tag
+        description: An integer representation of the version of the account.
+
+      - name: valid_to
+        description: The timestamp the version is valid to, null if record is still active.
