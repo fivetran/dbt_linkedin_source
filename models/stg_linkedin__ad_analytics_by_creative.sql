@@ -10,8 +10,11 @@ with base as (
         day as date_day,
         clicks, 
         impressions,
-        cost_in_local_currency,
-        cost_in_usd
+        {% if var('linkedin__use_local_currency') %}
+        cost_in_local_currency as cost
+        {% else %}
+        cost_in_usd as cost
+        {% endif %}
     from base
 
 ), surrogate_key as (

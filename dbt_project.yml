@@ -2,7 +2,6 @@
 name: 'linkedin_source'
 version: '1.0.0'
 config-version: 2
-profile: 'default'
 
 source-paths: ["models"]
 analysis-paths: ["analysis"]
@@ -10,6 +9,9 @@ test-paths: ["tests"]
 data-paths: ["data"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+
+vars:
+    linkedin__use_local_currency: true
 
 models:
     linkedin_source:
