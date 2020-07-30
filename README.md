@@ -2,7 +2,11 @@
 
 This package models LinkedIn Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads). It uses data in the format described by [this ERD](https://docs.google.com/presentation/d/1nwR5efra1p3S1uOwUgU9Wdx7WBKXE7onxNDffK0IpgM/edit#slide=id.g311502b468_5_443).
 
-The main focus of the package is to transform the core ad object tables into analytics-ready models, including an 'ad adapter' model that can be easily unioned in to other ad platform packages to get a single-view 
+This package enriches your Fivetran data by doing the following:
+
+* Adds descriptions to tables and columns that are synced using Fivetran
+* Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
+* Models staging tables, which will be used in our transform package
 
 ## Models
 
