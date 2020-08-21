@@ -2,8 +2,6 @@
 
 This package models LinkedIn Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads). It uses data in the format described by [this ERD](https://docs.google.com/presentation/d/1nwR5efra1p3S1uOwUgU9Wdx7WBKXE7onxNDffK0IpgM/edit#slide=id.g311502b468_5_443).
 
-The main focus of the package is to transform the core ad object tables into analytics-ready models, including an 'ad adapter' model that can be easily unioned in to other ad platform packages to get a single view. 
-
 ## Models
 
 This package contains staging models, designed to work simultaneously with our [LinkedIn Ads modeling package](https://github.com/fivetran/dbt_linkedin). The staging models:
