@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from {{ source('linkedin','campaign_history') }}
+    from {{ var('campaign_history') }}
 
 ), fields as (
 
