@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from {{ source('linkedin','creative_history') }}
+    from {{ var('creative_history') }}
 
 ), fields as (
 
