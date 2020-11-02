@@ -12,14 +12,13 @@ macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
 vars:
-    linkedin__use_local_currency: true
-
     linkedin_source: 
         account_history: "{{ source('linkedin','account_history') }}"
         ad_analytics_by_creative: "{{ source('linkedin', 'ad_analytics_by_creative') }}"
         campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
         campaign_history: "{{ source('linkedin','campaign_history') }}"
         creative_history: "{{ source('linkedin','creative_history') }}"
+        linkedin__use_local_currency: true
 
 models:
     linkedin_source:
