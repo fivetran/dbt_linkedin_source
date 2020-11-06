@@ -11,7 +11,7 @@ with base as (
         created_time as created_at,
         campaign_id,
         type as creative_type,
-        cast(version_tag as INT64) as version_tag,
+        cast(version_tag as {{ dbt_utils.type_bigint() }}) as version_tag,
         status as creative_status,
         click_uri
     from base
