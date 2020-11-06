@@ -15,4 +15,25 @@ seeds:
   linkedin_source_integration_tests:
     linkedin_creative_history_data:
       +column_types:
+        created_time: timestamp
+        last_modified_time: timestamp
         click_uri: "{{ 'string' if target.type == 'bigquery' else 'varchar' }}"
+    linkedin_ad_analytics_by_creative_data:
+      +column_types:
+        day: timestamp
+    linkedin_account_history_data:
+      +column_types:
+        created_time: timestamp
+        last_modified_time: timestamp
+    linkedin_campaign_group_history_data:
+      +column_types:
+        created_time: timestamp
+        last_modified_time: timestamp
+    linkedin_campaign_history_data:
+      +column_types:
+        created_time: timestamp
+        last_modified_time: timestamp
+    linkedin_creative_history_data:
+      +column_types:
+        created_time: timestamp
+        last_modified_time: timestamp
