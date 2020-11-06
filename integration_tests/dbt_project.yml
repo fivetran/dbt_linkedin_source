@@ -15,4 +15,4 @@ seeds:
   linkedin_source_integration_tests:
     linkedin_creative_history_data:
       +column_types:
-        click_uri: string
+        click_uri: "{{ 'string' if target.type == 'bigquery' else 'varchar' }}"
