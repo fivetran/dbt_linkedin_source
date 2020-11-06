@@ -27,7 +27,7 @@ with base as (
         {{ dbt_utils.get_url_parameter('click_uri', 'utm_medium') }} as utm_medium,
         {{ dbt_utils.get_url_parameter('click_uri', 'utm_campaign') }} as utm_campaign,
         {{ dbt_utils.get_url_parameter('click_uri', 'utm_content') }} as utm_content,
-        {{ dbt_utils.get_url_parameter('click_uri', 'utm_term') }} as utm_term,
+        {{ dbt_utils.get_url_parameter('click_uri', 'utm_term') }} as utm_term
     from fields
 
 ), valid_dates as (
