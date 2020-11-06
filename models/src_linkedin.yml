@@ -31,7 +31,7 @@ sources:
             description: The cost of the ads in the USD.
 
       - name: creative_history
-        description: Each recor represents a 'version' of a creative.
+        description: Each record represents a 'version' of a creative.
         columns:
           - name: id
             description: Unique internal ID representing the creative.
