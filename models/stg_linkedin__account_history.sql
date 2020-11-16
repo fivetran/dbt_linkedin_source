@@ -1,7 +1,18 @@
 with base as (
 
     select *
-    from {{ var('account_history') }}
+    from {{ ref('stg_linkedin__account_history_tmp') }}
+
+), macro as (
+
+    select
+        {{
+            fivetran_utils.fill_staging_columns(
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__account_history_tmp')),
+                staging_columns=get_account_history_columns()
+            )
+        }}
+    from base
 
 ), fields as (
 
@@ -12,7 +23,7 @@ with base as (
         name as account_name,
         currency,
         cast(version_tag as numeric) as version_tag
-    from base
+    from macro
 
 ), valid_dates as (
 

@@ -1,7 +1,18 @@
 with base as (
 
     select *
-    from {{ var('campaign_group_history') }}
+    from {{ ref('stg_linkedin__campaign_group_history_tmp') }}
+
+), macro as (
+
+    select
+        {{
+            fivetran_utils.fill_staging_columns(
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__campaign_group_history_tmp')),
+                staging_columns=get_campaign_group_history_columns()
+            )
+        }}
+    from base
 
 ), fields as (
 
@@ -11,7 +22,7 @@ with base as (
         account_id,
         created_time as created_at,
         name as campaign_group_name
-    from base
+    from macro
 
 ), valid_dates as (
 

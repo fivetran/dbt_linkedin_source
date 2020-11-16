@@ -1,7 +1,18 @@
 with base as (
 
     select *
-    from {{ var('creative_history') }}
+    from {{ ref('stg_linkedin__creative_history_tmp') }}
+
+), macro as (
+
+    select 
+        {{
+            fivetran_utils.fill_staging_columns(
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__creative_history_tmp')),
+                staging_columns=get_creative_history_columns()
+            )
+        }}
+    from base
 
 ), fields as (
 
@@ -14,7 +25,7 @@ with base as (
         cast(version_tag as numeric) as version_tag,
         status as creative_status,
         click_uri
-    from base
+    from macro
 
 ), url_fields as (
 
@@ -52,3 +63,4 @@ with base as (
 
 select *
 from surrogate_key
+

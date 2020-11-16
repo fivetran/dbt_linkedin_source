@@ -1,7 +1,18 @@
 with base as (
 
     select *
-    from {{ var('ad_analytics_by_creative') }}
+    from {{ ref('stg_linkedin__ad_analytics_by_creative_tmp') }}
+
+), macro as (
+
+    select
+        {{
+            fivetran_utils.fill_staging_columns(
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__ad_analytics_by_creative_tmp')),
+                staging_columns=get_ad_analytics_by_creative_columns()
+            )
+        }}
+    from base
 
 ), fields as (
 
@@ -15,7 +26,7 @@ with base as (
         {% else %}
         cost_in_usd as cost
         {% endif %}
-    from base
+    from macro
 
 ), surrogate_key as (
 
