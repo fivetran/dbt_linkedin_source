@@ -1,19 +1,17 @@
-
 name: 'linkedin_source'
 version: '0.2.0'
 config-version: 2
 require-dbt-version: [">=0.18.0", "<0.19.0"]
 
 models:
-    linkedin_source:
-        materialized: view
+  linkedin_source:
+    materialized: view
 
 vars:
-    linkedin_source:
-        linkedin__use_local_currency: true
-        account_history: "{{ source('linkedin','account_history') }}"
-        ad_analytics_by_creative: "{{ source('linkedin','ad_analytics_by_creative') }}"
-        campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
-        campaign_history: "{{ source('linkedin','campaign_history') }}"
-        creative_history: "{{ source('linkedin','creative_history') }}"
-        
+  linkedin_source:
+    linkedin__use_local_currency: true
+    account_history: "{{ source('linkedin','account_history') }}"
+    ad_analytics_by_creative: "{{ source('linkedin','ad_analytics_by_creative') }}"
+    campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
+    campaign_history: "{{ source('linkedin','campaign_history') }}"
+    creative_history: "{{ source('linkedin','creative_history') }}"
