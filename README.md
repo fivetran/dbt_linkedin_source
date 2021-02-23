@@ -1,6 +1,6 @@
 # LinkedIn Ad Analytics (Source)
 
-This package models LinkedIn Ad Analytics data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads). It uses data in the format described by [this ERD](https://docs.google.com/presentation/d/1nwR5efra1p3S1uOwUgU9Wdx7WBKXE7onxNDffK0IpgM/edit#slide=id.g311502b468_5_443).
+This package models LinkedIn Ad Analytics data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-ads#schemainformation).
 
 ## Models
 
@@ -24,8 +24,8 @@ By default, this package will look for your LinkedIn Ad Analytics data in the `l
 config-version: 2
 
 vars:
-    linkedin_schema: your_database_name
-    linkedin_database: your_schema_name 
+    linkedin_database: your_database_name
+    linkedin_schema: your_schema_name
 ```
 
 Additionally, the package allows you to select whether you want to add in costs in USD or the local currency of the ad. By default, the package used USD. If you would like to have costs in the local currency, add the following variable to your `dbt_project.yml` file:
