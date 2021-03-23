@@ -27,8 +27,8 @@ with base as (
         cost_in_usd as cost
         {% endif %}
 
-        {% if var('linkedin__passthrough_metrics', []) != [] %}
-        , {{ var('linkedin__passthrough_metrics', [] )  | join(', ') }}
+        {% if var('linkedin__passthrough_metrics') %}
+        , {{ var('linkedin__passthrough_metrics' )  | join(', ') }}
         {% endif %}
 
     from macro
