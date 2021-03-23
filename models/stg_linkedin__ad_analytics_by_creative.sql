@@ -26,6 +26,11 @@ with base as (
         {% else %}
         cost_in_usd as cost
         {% endif %}
+
+        {% if var('linkedin__passthrough_metrics', []) != [] %}
+        , {{ var('linkedin__passthrough_metrics', [] )  | join(', ') }}
+        {% endif %}
+
     from macro
 
 ), surrogate_key as (
