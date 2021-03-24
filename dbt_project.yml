@@ -1,12 +1,13 @@
 
 name: 'linkedin_source'
-version: '0.2.0'
+version: '0.3.0'
 config-version: 2
 require-dbt-version: [">=0.18.0", "<0.20.0"]
 
 models:
     linkedin_source:
-        materialized: view
+        +materialized: view
+        +schema: stg_linkedin
 
 vars:
     linkedin_source:
@@ -16,4 +17,5 @@ vars:
         campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
         campaign_history: "{{ source('linkedin','campaign_history') }}"
         creative_history: "{{ source('linkedin','creative_history') }}"
-        
+    
+    linkedin__passthrough_metrics: [] 
