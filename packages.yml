@@ -3,8 +3,7 @@ packages:
     version: [">=0.6.0", "<0.7.0"]
     
   - git: https://github.com/fivetran/dbt_fivetran_utils.git
-    revision: feature/spark
     warn-unpinned: false  
 
-  - git: "https://github.com/fishtown-analytics/spark-utils"
-    warn-unpinned: false
+  - package: fishtown-analytics/spark_utils
+    version: [">=0.2.0", "<0.3.0"] 
