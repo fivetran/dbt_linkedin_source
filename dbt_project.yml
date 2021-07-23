@@ -1,23 +1,19 @@
-
 name: 'linkedin_source'
-version: '0.3.2'
+version: '0.4.2'
 config-version: 2
-require-dbt-version: [">=0.18.0", "<0.20.0"]
-
+require-dbt-version: [">=0.20.0", "<0.21.0"]
 models:
-    linkedin_source:
-        +materialized: view
-        +schema: stg_linkedin
-
+  linkedin_source:
+    +materialized: view
+    +schema: stg_linkedin
 vars:
-    linkedin_source:
-        linkedin__use_local_currency: true
-        account_history: "{{ source('linkedin','account_history') }}"
-        ad_analytics_by_creative: "{{ source('linkedin','ad_analytics_by_creative') }}"
-        campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
-        campaign_history: "{{ source('linkedin','campaign_history') }}"
-        creative_history: "{{ source('linkedin','creative_history') }}"
-    dbt_utils_dispatch_list: ['spark_utils', 'fivetran_utils']
-    fivetran_utils_dispatch_list: ['spark_utils']
-    
-    linkedin__passthrough_metrics: [] 
+  linkedin_source:
+    linkedin__use_local_currency: true
+    account_history: "{{ source('linkedin','account_history') }}"
+    ad_analytics_by_creative: "{{ source('linkedin','ad_analytics_by_creative') }}"
+    campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
+    campaign_history: "{{ source('linkedin','campaign_history') }}"
+    creative_history: "{{ source('linkedin','creative_history') }}"
+  dbt_utils_dispatch_list: ['spark_utils', 'fivetran_utils']
+  fivetran_utils_dispatch_list: ['spark_utils']
+  linkedin__passthrough_metrics: []
