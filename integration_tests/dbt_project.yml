@@ -37,3 +37,7 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
+
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
