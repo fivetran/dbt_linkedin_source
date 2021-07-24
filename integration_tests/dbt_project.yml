@@ -1,5 +1,5 @@
 name: 'linkedin_source_integration_tests'
-version: '0.3.2'
+version: '0.3.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -37,3 +37,6 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
