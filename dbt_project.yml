@@ -1,5 +1,5 @@
 name: 'linkedin_source'
-version: '0.4.0'
+version: '0.3.0'
 config-version: 2
 require-dbt-version: [">=0.20.0"]
 models:
@@ -14,6 +14,4 @@ vars:
     campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
     campaign_history: "{{ source('linkedin','campaign_history') }}"
     creative_history: "{{ source('linkedin','creative_history') }}"
-  dbt_utils_dispatch_list: ['spark_utils', 'fivetran_utils']
-  fivetran_utils_dispatch_list: ['spark_utils']
   linkedin__passthrough_metrics: []
