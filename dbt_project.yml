@@ -1,7 +1,7 @@
 name: 'linkedin_source'
 version: '0.3.0'
 config-version: 2
-require-dbt-version: [">=0.20.0"]
+require-dbt-version: [">=0.21.0", "<1.1.0"]
 models:
   linkedin_source:
     +materialized: view
