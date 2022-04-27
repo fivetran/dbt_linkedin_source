@@ -1,3 +1,6 @@
+# dbt_linkedin_source v0.4.1
+## Fixes
+- All timestamp fields within the staging models have been cast using `{{ dbt_utils.type_timestamp() }}`. This is needed as the timestamps need to be consistently cast in order for downstream date functions to succeed.
 # dbt_linkedin_source v0.4.0
 🎉 dbt v1.0.0 Compatibility 🎉
 ## 🚨 Breaking Changes 🚨

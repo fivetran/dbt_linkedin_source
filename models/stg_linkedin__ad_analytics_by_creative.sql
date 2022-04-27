@@ -18,7 +18,7 @@ with base as (
 
     select
         creative_id,
-        day as date_day,
+        cast(day as {{ dbt_utils.type_timestamp() }}) as date_day,
         clicks, 
         impressions,
         {% if var('linkedin__use_local_currency') %}

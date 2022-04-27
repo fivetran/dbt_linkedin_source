@@ -18,8 +18,8 @@ with base as (
 
     select 
         id as account_id,
-        last_modified_time as last_modified_at,
-        created_time as created_at,
+        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
+        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
         name as account_name,
         currency,
         cast(version_tag as numeric) as version_tag

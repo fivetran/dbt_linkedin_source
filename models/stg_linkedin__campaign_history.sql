@@ -18,10 +18,10 @@ with base as (
 
     select 
         id as campaign_id,
-        last_modified_time as last_modified_at,
+        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
         account_id,
         campaign_group_id,
-        created_time as created_at,
+        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
         name as campaign_name,
         cast(version_tag as numeric) as version_tag
     from macro
