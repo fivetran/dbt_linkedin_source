@@ -4,7 +4,7 @@
 This package models LinkedIn Ad Analytics data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-ads#schemainformation).
 
 ## Models
-This package contains staging models, designed to work simultaneously with our [LinkedIn Ad Analytics modeling package](https://github.com/fivetran/dbt_linkedin) and our [multi-platform Ad Reporting package](https://github.com/fivetran/dbt_ad_reporting). 
+This package contains staging models, designed to work simultaneously with our [LinkedIn Ad Analytics transformation package](https://github.com/fivetran/dbt_linkedin) and our [multi-platform Ad Reporting package](https://github.com/fivetran/dbt_ad_reporting). 
 
 The staging models:
 * Name columns consistently across all packages:
