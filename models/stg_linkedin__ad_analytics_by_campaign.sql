@@ -1,25 +1,28 @@
+
 with base as (
 
-    select *
-    from {{ ref('stg_linkedin__ad_analytics_by_creative_tmp') }}
+    select * 
+    from {{ ref('stg_linkedin__ad_analytics_by_campaign_tmp') }}
+),
 
-), macro as (
+macro as (
 
     select
         {{
             fivetran_utils.fill_staging_columns(
-                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__ad_analytics_by_creative_tmp')),
-                staging_columns=get_ad_analytics_by_creative_columns()
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__ad_analytics_by_campaign_tmp')),
+                staging_columns=get_ad_analytics_by_campaign_columns()
             )
         }}
     from base
+),
 
-), fields as (
-
-    select
+fields as (
+    
+    select 
         cast(day as {{ dbt_utils.type_timestamp() }}) as date_day,
-        creative_id,
-        clicks, 
+        campaign_id,
+        clicks,
         impressions,
         {% if var('linkedin__use_local_currency') %}
         cost_in_local_currency as cost
@@ -30,15 +33,15 @@ with base as (
         {{ fivetran_utils.fill_pass_through_columns('linkedin__passthrough_metrics') }}
 
     from macro
+),
 
-), surrogate_key as (
+final as (
 
-    select
+    select 
         *,
-        {{ dbt_utils.surrogate_key(['date_day','creative_id']) }} as daily_creative_id
+        {{ dbt_utils.surrogate_key(['date_day','campaign_id']) }} as daily_campaign_id
     from fields
-
 )
 
 select *
-from surrogate_key
+from final

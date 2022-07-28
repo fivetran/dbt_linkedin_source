@@ -10,6 +10,7 @@ sources:
 
     tables:
       - name: ad_analytics_by_creative
+        identifier: "{{ var('linkedin_ad_analytics_by_creative_identifier', 'ad_analytics_by_creative') }}"
         description: Each record in this table represents the daily performance of ads at the creative level.
         columns:
           - name: creative_id
@@ -32,6 +33,7 @@ sources:
 
       - name: creative_history
         description: Each record represents a 'version' of a creative.
+        identifier: "{{ var('linkedin_creative_history_identifier', 'creative_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the creative.
@@ -75,6 +77,7 @@ sources:
 
       - name: campaign_history
         description: Each record represents a 'version' of a campaign.
+        identifier: "{{ var('linkedin_campaign_history_identifier', 'campaign_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the campaign.
@@ -99,6 +102,7 @@ sources:
               
       - name: campaign_group_history
         description: Each record represents a 'version' of a campaign group.
+        identifier: "{{ var('linkedin_campaign_group_history_identifier', 'campaign_group_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the campaign group.
@@ -117,6 +121,7 @@ sources:
             
       - name: account_history
         description: Each record represents a 'version' of an account. 
+        identifier: "{{ var('linkedin_account_history_identifier', 'account_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the account.
@@ -135,3 +140,25 @@ sources:
 
           - name: version_tag
             description: An integer representation of the version of the account.
+
+      - name: ad_analytics_by_campaign
+        description: Each record in this table represents the daily performance of ads at the campaign level.
+        identifier: "{{ var('linkedin_ad_analytics_by_campaign_identifier', 'ad_analytics_by_campaign') }}"
+        columns:
+          - name: campaign_id
+            description: The ID of the related campaign.
+
+          - name: day
+            description: The day of the activity.
+
+          - name: clicks
+            description: The count of chargeable clicks.
+
+          - name: impressions
+            description: This is the count of "impressions" for Direct Ads and Sponsored Updates and "sends" for InMails.
+
+          - name: cost_in_local_currency
+            description: The cost of the ads in the local currency.
+
+          - name: cost_in_usd
+            description: The cost of the ads in the USD.
