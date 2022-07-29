@@ -1,14 +1,14 @@
 with base as (
 
     select *
-    from {{ ref('stg_linkedin__ad_analytics_by_creative_tmp') }}
+    from {{ ref('stg_linkedin_ads__ad_analytics_by_creative_tmp') }}
 
 ), macro as (
 
     select
         {{
             fivetran_utils.fill_staging_columns(
-                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__ad_analytics_by_creative_tmp')),
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin_ads__ad_analytics_by_creative_tmp')),
                 staging_columns=get_ad_analytics_by_creative_columns()
             )
         }}
@@ -21,13 +21,13 @@ with base as (
         creative_id,
         clicks, 
         impressions,
-        {% if var('linkedin__use_local_currency') %}
+        {% if var('linkedin_ads__use_local_currency', false) %}
         cost_in_local_currency as cost
         {% else %}
         cost_in_usd as cost
         {% endif %}
 
-        {{ fivetran_utils.fill_pass_through_columns('linkedin__passthrough_metrics') }}
+        {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__passthrough_metrics') }}
 
     from macro
 

@@ -1,14 +1,14 @@
 with base as (
 
     select *
-    from {{ ref('stg_linkedin__creative_history_tmp') }}
+    from {{ ref('stg_linkedin_ads__creative_history_tmp') }}
 
 ), macro as (
 
     select 
         {{
             fivetran_utils.fill_staging_columns(
-                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin__creative_history_tmp')),
+                source_columns=adapter.get_columns_in_relation(ref('stg_linkedin_ads__creative_history_tmp')),
                 staging_columns=get_creative_history_columns()
             )
         }}

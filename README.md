@@ -51,8 +51,8 @@ By default, this package runs using your destination and the `linkedin_ads` sche
 ```yml
 # dbt_project.yml
 vars:
-    linkedin_database: your_destination_name
-    linkedin_schema: your_schema_name
+    linkedin_ads_database: your_destination_name
+    linkedin_ads_schema: your_schema_name
 ```
 
 ## (Optional) Step 4: Additional configurations
@@ -63,7 +63,7 @@ Additionally, the package allows you to select whether you want to add in costs 
 ```yml
 # dbt_project.yml
 vars:
-    linkedin__use_local_currency: True # false by default -- uses USD
+    linkedin_ads__use_local_currency: True # false by default -- uses USD
 ```
 
 ### Passing Through Additional Metrics
@@ -72,7 +72,7 @@ By default, this package will select `clicks`, `impressions`, and `cost` from `a
 ```yml
 # dbt_project.yml
 vars:
-    linkedin__passthrough_metrics: 
+    linkedin_ads__passthrough_metrics: 
         - name: "new_custom_field"
           alias: "custom_field"
         - name: "unique_int_field"
@@ -98,7 +98,7 @@ If an individual source table has a different name than the package expects, add
 ```yml
 # dbt_project.yml
 vars:
-    linkedin_<default_source_table_name>_identifier: your_table_name 
+    linkedin_ads_<default_source_table_name>_identifier: your_table_name 
 ```
 
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™

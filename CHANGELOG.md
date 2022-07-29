@@ -1,4 +1,25 @@
-# dbt_linkedin_source v0.4.1
+# dbt_linkedin_source v0.5.0
+
+PR [#45](https://github.com/fivetran/dbt_linkedin_source/pull/45) includes the following changes:
+
+## 🚨 Breaking Changes 🚨
+- **All** staging models and **all** variables now have the prefix `linkedin_ads_*`. They previously were prepended with `linkedin_*`. This includes the required schema and database variables.
+- The declaration of passthrough variables within your root `dbt_project.yml` has changed. To allow for more flexibility and better tracking of passthrough columns, you will now want to define passthrough columns in the following format:
+```yml
+vars:
+  linkedin_ads__passthrough_metrics: # Note that this used to be called linkedin__passthrough_metrics
+    - name: "my_field_to_include" # Required: Name of the field within the source.
+      alias: "field_alias" # Optional: If you wish to alias the field within the staging model.
+      transform_sql: "cast(field_alias as string)" # Optional: If you wish to define the datatype or apply a light transformation.
+```
+
+## 🎉 Feature Enhancements 🎉
+- Addition of the `stg_linkedin_ads__ad_analytics_by_campaign` model. This is to generate a more accurate representation of Linkedin Ad Analytics data at the campaign level.
+- README updates for easier navigation and use of the package.
+- Addition of identifier variables for each of the source tables to allow for further flexibility in source table direction within the dbt project.
+- Revamped grain uniqueness tests for each staging table.
+
+- # dbt_linkedin_source v0.4.1
 ## Fixes
 - All timestamp fields within the staging models have been cast using `{{ dbt_utils.type_timestamp() }}`. This is needed as the timestamps need to be consistently cast in order for downstream date functions to succeed.
 # dbt_linkedin_source v0.4.0

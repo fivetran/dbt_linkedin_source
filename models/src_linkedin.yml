@@ -2,15 +2,15 @@ version: 2
 
 sources:
   - name: linkedin
-    schema: "{{ var('linkedin_schema', 'linkedin_ads') }}"
-    database: "{% if target.type != 'spark'%}{{ var('linkedin_database', target.database) }}{% endif %}"
+    schema: "{{ var('linkedin_ads_schema', 'linkedin_ads') }}"
+    database: "{% if target.type != 'spark'%}{{ var('linkedin_ads_database', target.database) }}{% endif %}"
 
     loader: Fivetran
     loaded_at_field: _fivetran_synced
 
     tables:
       - name: ad_analytics_by_creative
-        identifier: "{{ var('linkedin_ad_analytics_by_creative_identifier', 'ad_analytics_by_creative') }}"
+        identifier: "{{ var('linkedin_ads_ad_analytics_by_creative_identifier', 'ad_analytics_by_creative') }}"
         description: Each record in this table represents the daily performance of ads at the creative level.
         columns:
           - name: creative_id
@@ -33,7 +33,7 @@ sources:
 
       - name: creative_history
         description: Each record represents a 'version' of a creative.
-        identifier: "{{ var('linkedin_creative_history_identifier', 'creative_history') }}"
+        identifier: "{{ var('linkedin_ads_creative_history_identifier', 'creative_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the creative.
@@ -77,7 +77,7 @@ sources:
 
       - name: campaign_history
         description: Each record represents a 'version' of a campaign.
-        identifier: "{{ var('linkedin_campaign_history_identifier', 'campaign_history') }}"
+        identifier: "{{ var('linkedin_ads_campaign_history_identifier', 'campaign_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the campaign.
@@ -102,7 +102,7 @@ sources:
               
       - name: campaign_group_history
         description: Each record represents a 'version' of a campaign group.
-        identifier: "{{ var('linkedin_campaign_group_history_identifier', 'campaign_group_history') }}"
+        identifier: "{{ var('linkedin_ads_campaign_group_history_identifier', 'campaign_group_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the campaign group.
@@ -121,7 +121,7 @@ sources:
             
       - name: account_history
         description: Each record represents a 'version' of an account. 
-        identifier: "{{ var('linkedin_account_history_identifier', 'account_history') }}"
+        identifier: "{{ var('linkedin_ads_account_history_identifier', 'account_history') }}"
         columns:
           - name: id
             description: Unique internal ID representing the account.
@@ -143,7 +143,7 @@ sources:
 
       - name: ad_analytics_by_campaign
         description: Each record in this table represents the daily performance of ads at the campaign level.
-        identifier: "{{ var('linkedin_ad_analytics_by_campaign_identifier', 'ad_analytics_by_campaign') }}"
+        identifier: "{{ var('linkedin_ads_ad_analytics_by_campaign_identifier', 'ad_analytics_by_campaign') }}"
         columns:
           - name: campaign_id
             description: The ID of the related campaign.

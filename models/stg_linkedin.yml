@@ -2,7 +2,7 @@ version: 2
 
 models:
 
-  - name: stg_linkedin__ad_analytics_by_creative
+  - name: stg_linkedin_ads__ad_analytics_by_creative
     columns:
       - name: daily_creative_id
         description: A unique key, a combination of creative_id and date_day.
@@ -29,7 +29,7 @@ models:
       - name: cost
         description: The cost of the ads in the local currency or USD.
 
-  - name: stg_linkedin__ad_analytics_by_campaign
+  - name: stg_linkedin_ads__ad_analytics_by_campaign
     columns:
       - name: daily_campaign_id
         description: A unique key, a combination of creative_id and date_day.
@@ -56,7 +56,7 @@ models:
       - name: cost
         description: The cost of the ads in the local currency or USD.
 
-  - name: stg_linkedin__creative_history
+  - name: stg_linkedin_ads__creative_history
     columns:
       - name: creative_version_id
         description: A unique key, a combination of creative_id and version_tag.
@@ -138,7 +138,7 @@ models:
       - name: utm_term
         description: The utm_term parameter of the ad, extracted from the `click_uri`.
 
-  - name: stg_linkedin__campaign_history
+  - name: stg_linkedin_ads__campaign_history
     columns:
       - name: campaign_version_id
         description: A unique key, a combination of campaign_id and version_tag.
@@ -177,7 +177,7 @@ models:
       - name: valid_to
         description: The timestamp the version is valid to, null if record is still active.
 
-  - name: stg_linkedin__campaign_group_history
+  - name: stg_linkedin_ads__campaign_group_history
     columns:
       - name: campaign_group_version_id
         description: A unique key, a combination of campaign_group_id and last_modified_at.
@@ -210,7 +210,7 @@ models:
       - name: valid_to
         description: The timestamp the version is valid to, null if record is still active.
           
-  - name: stg_linkedin__account_history
+  - name: stg_linkedin_ads__account_history
     columns:
       - name: account_version_id
         description: A unique key, a combination of account_id and version_tag.
