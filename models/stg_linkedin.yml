@@ -209,7 +209,16 @@ models:
           
       - name: valid_to
         description: The timestamp the version is valid to, null if record is still active.
-          
+      
+      - name: is_backfilled
+        description: Flag that denotes whether the campaign group was created organically or to backfill existing campaigns. This is a read-only field set by the system. Default = false.
+
+      - name: run_schedule_start_at
+        description: Represents the inclusive (greater than or equal to) date when to start running the associated campaigns under this campaign group. This field is required.
+
+      - name: run_schedule_end_at
+        description: Represents the exclusive (strictly less than) date when to stop running the associated campaigns under this campaign group. If this field is unset, it indicates an open range with no end date. 
+
   - name: stg_linkedin_ads__account_history
     columns:
       - name: account_version_id
@@ -238,10 +247,23 @@ models:
         description: A label for the account.
 
       - name: currency
-        description: The ISO 4217 currency code of the account, such as 'USD' for United States Dollar.
+        description: The ISO 4217 currency code of the account, such as 'USD' for United States Dollar (default).
 
       - name: version_tag
         description: An integer representation of the version of the account.
 
       - name: valid_to
         description: The timestamp the version is valid to, null if record is still active.
+
+      - name: status
+        description: |
+          ACTIVE - Account is active; this is the default state
+          CANCELLED - Account has been permanently cancelled
+          DRAFT - Account is in draft status, meaning it's not yet fully set up and it is not serving
+          PENDING_DELETION - Denotes that the account has been requested to be deleted that is currently pending
+          REMOVED - Denotes that the account was deleted, but must remain fetchable due to the existence of performance data.
+
+      - name: type
+        description: |
+          BUSINESS - This is the only value allowed when creating accounts through the API.
+          ENTERPRISE - This value cannot be used to create accounts through the API and is reserved for accounts created by LinkedIn's internal ad operations systems.

@@ -18,10 +18,14 @@ with base as (
 
     select 
         id as campaign_group_id,
-        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
+        name as campaign_group_name,
         account_id,
-        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
-        name as campaign_group_name
+        backfilled as is_backfilled,
+        cast(run_schedule_start as {{ dbt_utils.type_timestamp() }}) as run_schedule_start_at,
+        cast(run_schedule_end as {{ dbt_utils.type_timestamp() }}) as run_schedule_end_at,
+        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
+        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at
+
     from macro
 
 ), valid_dates as (

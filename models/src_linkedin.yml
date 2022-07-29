@@ -99,7 +99,25 @@ sources:
               
           - name: version_tag
             description: An integer representation of the version of the campaign.
-              
+          
+          - name: audience_expansion_enabled
+            description: Boolean (default=false) representing whether Audience Expansion is enabled for the campaign provides query expansion for certain targeting criteria.
+
+          - name: cost_type
+            description: |
+              CPM - Cost per thousand advertising impressions. If type=SPONSORED_INMAILS; cost per send(CPS) is measured as CPM x 1000.
+              CPC- Cost per individual click on the associated link.
+              CPV- Cost per view for video ads.
+
+          - name: creative_selection
+            description: |
+              ROUND_ROBIN - Rotate through available creatives to serve them as evenly as possible.
+              OPTIMIZED (default) - Bias selection taking into account such as expected performance. Not available for Message and Conversation Ads (type=SPONSORED_INMAILS).
+
+          - name: daily_budget_amount
+              ## left off here
+
+
       - name: campaign_group_history
         description: Each record represents a 'version' of a campaign group.
         identifier: "{{ var('linkedin_ads_campaign_group_history_identifier', 'campaign_group_history') }}"
@@ -118,6 +136,15 @@ sources:
             
           - name: name
             description: A label for the campaign group.
+
+          - name: backfilled
+            description: Flag that denotes whether the campaign group was created organically or to backfill existing campaigns. This is a read-only field set by the system. Default = false
+
+          - name: run_schedule_start
+            description: Represents the inclusive (greater than or equal to) date when to start running the associated campaigns under this campaign group. This field is required.
+
+          - name: run_schedule_end
+            description: Represents the exclusive (strictly less than) date when to stop running the associated campaigns under this campaign group. If this field is unset, it indicates an open range with no end date. 
             
       - name: account_history
         description: Each record represents a 'version' of an account. 
@@ -136,10 +163,35 @@ sources:
             description: A label for the account.
 
           - name: currency
-            description: The ISO 4217 currency code of the account, such as 'USD' for United States Dollar.
+            description: The ISO 4217 currency code of the account, such as 'USD' for United States Dollar (default).
 
           - name: version_tag
             description: An integer representation of the version of the account.
+
+          - name: notified_on_campaign_optimization
+            description: Boolean (default=false) indicating if the campaign contact is notified about campaign optimization opportunities
+
+          - name: notified_on_creative_approval
+            description: Boolean (default=false) indicating if the creative contact is notified when a creative has been reviewed and approved
+
+          - name: notified_on_creative_rejection
+            description: Boolean (default=false) indicating if the creative contact is notified when a creative has been rejected due to content
+
+          - name: notified_on_end_of_campaign
+            description: Boolean (default=false) indicating if the campaign contact is notified when an associated campaign has been completed
+
+          - name: status
+            description: |
+              ACTIVE - Account is active; this is the default state
+              CANCELLED - Account has been permanently cancelled
+              DRAFT - Account is in draft status, meaning it's not yet fully set up and it is not serving
+              PENDING_DELETION - Denotes that the account has been requested to be deleted that is currently pending
+              REMOVED - Denotes that the account was deleted, but must remain fetchable due to the existence of performance data.
+
+          - name: type
+            description: |
+              BUSINESS - This is the only value allowed when creating accounts through the API.
+              ENTERPRISE - This value cannot be used to create accounts through the API and is reserved for accounts created by LinkedIn's internal ad operations systems.
 
       - name: ad_analytics_by_campaign
         description: Each record in this table represents the daily performance of ads at the campaign level.
