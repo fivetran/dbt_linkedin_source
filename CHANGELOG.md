@@ -17,7 +17,6 @@ vars:
 - Addition of the `stg_linkedin_ads__ad_analytics_by_campaign` model. This is to generate a more accurate representation of Linkedin Ad Analytics data at the campaign level.
 - README updates for easier navigation and use of the package.
 - Addition of identifier variables for each of the source tables to allow for further flexibility in source table direction within the dbt project.
-- Revamped grain uniqueness tests for each staging table.
 
 - # dbt_linkedin_source v0.4.1
 ## Fixes
