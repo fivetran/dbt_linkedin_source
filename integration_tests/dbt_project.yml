@@ -10,7 +10,7 @@ vars:
     linkedin_ads_campaign_group_history_identifier: "linkedin_campaign_group_history_data"
     linkedin_ads_campaign_history_identifier: "linkedin_campaign_history_data"
     linkedin_ads_creative_history_identifier: "linkedin_creative_history_data"
-    linkedin_ads_ad_analytics_by_campaign_identifier: "ad_analytics_by_campaign_data"
+    linkedin_ads_ad_analytics_by_campaign_identifier: "linkedin_ad_analytics_by_campaign_data"
 
     linkedin_ads_schema: linkedin_source_integration_tests
 
