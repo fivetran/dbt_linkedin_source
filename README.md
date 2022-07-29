@@ -46,7 +46,7 @@ packages:
 ```
 
 ## Step 3: Define database and schema variables
-By default, this package runs using your destination and the `linkedin_ads` schema. If this is not where your Linkedin Ads data is (for example, if your linkedin schema is named `linkedin_fivetran`), add the following configuration to your root `dbt_project.yml` file:
+By default, this package runs using your destination and the `linkedin_ads` schema. If this is not where your Linkedin Ads data is (for example, if your linkedin schema is named `linkedin_ads_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml
@@ -82,7 +82,7 @@ vars:
 ```
 
 ### Change the build schema
-By default, this package builds the Linkedin Ads staging models within a schema titled (`<target_schema>` + `_linkedin_source`) in your destination. If this is not where you would like your Linkedin staging data to be written to, add the following configuration to your root `dbt_project.yml` file:
+By default, this package builds the Linkedin Ads staging models within a schema titled (`<target_schema>` + `_linkedin_ads_source`) in your destination. If this is not where you would like your Linkedin staging data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml

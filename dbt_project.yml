@@ -6,7 +6,7 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 models:
   linkedin_source:
     +materialized: view
-    +schema: linkedin_source
+    +schema: linkedin_ads_source
 
 vars:
   linkedin_source:
