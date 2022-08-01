@@ -13,9 +13,6 @@
     {"name": "notified_on_end_of_campaign", "datatype": "boolean"},
     {"name": "reference", "datatype": dbt_utils.type_string()},
     {"name": "status", "datatype": dbt_utils.type_string()},
-    {"name": "total_budget_amount", "datatype": dbt_utils.type_float()},
-    {"name": "total_budget_currency_code", "datatype": dbt_utils.type_string()},
-    {"name": "total_budget_ends_at", "datatype": dbt_utils.type_int()},
     {"name": "type", "datatype": dbt_utils.type_string()},
     {"name": "version_tag", "datatype": dbt_utils.type_string()}
 ] %}

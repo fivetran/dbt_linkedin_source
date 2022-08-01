@@ -20,6 +20,7 @@ with base as (
         id as campaign_group_id,
         name as campaign_group_name,
         account_id,
+        status,
         backfilled as is_backfilled,
         cast(run_schedule_start as {{ dbt_utils.type_timestamp() }}) as run_schedule_start_at,
         cast(run_schedule_end as {{ dbt_utils.type_timestamp() }}) as run_schedule_end_at,

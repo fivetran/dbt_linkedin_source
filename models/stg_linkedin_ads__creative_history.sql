@@ -24,7 +24,8 @@ with base as (
         type as creative_type,
         cast(version_tag as numeric) as version_tag,
         status as creative_status,
-        click_uri
+        click_uri,
+        call_to_action_label_type
     from macro
 
 ), url_fields as (
