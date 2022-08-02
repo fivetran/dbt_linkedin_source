@@ -18,14 +18,14 @@ with base as (
 
     select
         id as creative_id,
-        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
-        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
         campaign_id,
-        type as creative_type,
+        type,
         cast(version_tag as numeric) as version_tag,
-        status as creative_status,
+        status,
         click_uri,
-        call_to_action_label_type
+        call_to_action_label_type,
+        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
+        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at
     from macro
 
 ), url_fields as (

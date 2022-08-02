@@ -89,7 +89,7 @@ models:
       - name: campaign_id
         description: The ID of the campaign the creative belongs to.
 
-      - name: creative_type
+      - name: type
         description: |
           TEXT_AD - Text with Sponsored Link to landing page on your site.
           SPONSORED_STATUS_UPDATE - Sponsored status update from a profile page.

@@ -3,7 +3,7 @@
 PR [#45](https://github.com/fivetran/dbt_linkedin_source/pull/45) includes the following changes:
 
 ## 🚨 Breaking Changes 🚨
-- **All** staging models and **all** variables now have the prefix `linkedin_ads_*`. They previously were prepended with `linkedin_*`. This includes the required schema and database variables.
+- **All** staging models and **all** variables now have the prefix `linkedin_ads_*`. They previously were prepended with `linkedin_*`. This includes the required schema and database variables, and the optional passthrough-column variable.
 - Staging models are now by default written within a schema titled (`<target_schema>` + `_linkedin_ads_source`) in your destination. Previously, this was titled (`<target_schema>` + `_stg_linkedin`).
 - The declaration of passthrough variables within your root `dbt_project.yml` has changed. To allow for more flexibility and better tracking of passthrough columns, you will now want to define passthrough columns in the following format:
 ```yml
