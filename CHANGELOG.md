@@ -1,6 +1,6 @@
 # dbt_linkedin_source v0.5.0
 
-PR [#45](https://github.com/fivetran/dbt_linkedin_source/pull/45) includes the following changes:
+PR [#46](https://github.com/fivetran/dbt_linkedin_source/pull/46) includes the following changes:
 
 ## 🚨 Breaking Changes 🚨
 - **All** staging models and **all** variables now have the prefix `linkedin_ads_*`. They previously were prepended with `linkedin_*`. This includes the required schema and database variables, and the optional passthrough-column variable.

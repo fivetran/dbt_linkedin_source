@@ -80,6 +80,7 @@ vars:
           transform_sql: "cast(field_id as int)"
         - name: "that_field"
 ```
+> Please ensure you use due diligence when adding metrics to these models. The metrics added by default (`clicks`, `impressions`, and `cost`) have been vetting by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports which are comprised of averages. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate.
 
 ### Change the build schema
 By default, this package builds the Linkedin Ads staging models within a schema titled (`<target_schema>` + `_linkedin_ads_source`) in your destination. If this is not where you would like your Linkedin staging data to be written to, add the following configuration to your root `dbt_project.yml` file:
