@@ -10,7 +10,7 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# LinkedIn Ad Analytics Source dbt Package ([docs](https://fivetran-dbt-linkedin.netlify.app/#!/overview))
+# LinkedIn Ad Analytics Source dbt Package ([docs](https://fivetran.github.io/dbt_linkedin_source/))
 
 # 📣 What does this dbt package do?
 - Materializes [Linkedin Ads Analytics staging tables](https://fivetran.github.io/dbt_linkedin_source/#!/overview/linkedin_source/models/?g_v=1&g_e=seeds) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-ads#schemainformation). These staging tables clean, test, and prepare your Linkedin Ads Analytics data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads) for analysis by doing the following:
