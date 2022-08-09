@@ -17,7 +17,7 @@ with base as (
 ), fields as (
 
     select
-        cast(day as {{ dbt_utils.type_timestamp() }}) as date_day,
+        {{ dbt_utils.date_trunc('day', 'day') }} as date_day,
         creative_id,
         clicks, 
         impressions,
@@ -27,18 +27,11 @@ with base as (
         cost_in_usd as cost
         {% endif %}
 
-        {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__passthrough_metrics') }}
+        {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__creative_passthrough_metrics') }}
 
     from macro
-
-), surrogate_key as (
-
-    select
-        *,
-        {{ dbt_utils.surrogate_key(['date_day','creative_id']) }} as daily_creative_id
-    from fields
 
 )
 
 select *
-from surrogate_key
+from fields

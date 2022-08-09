@@ -20,7 +20,7 @@ macro as (
 fields as (
     
     select 
-        cast(day as {{ dbt_utils.type_timestamp() }}) as date_day,
+        {{ dbt_utils.date_trunc('day', 'day') }} as date_day,
         campaign_id,
         clicks,
         impressions,
@@ -30,18 +30,10 @@ fields as (
         cost_in_usd as cost
         {% endif %}
 
-        {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__passthrough_metrics') }}
+        {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__campaign_passthrough_metrics') }}
 
     from macro
-),
-
-final as (
-
-    select 
-        *,
-        {{ dbt_utils.surrogate_key(['date_day','campaign_id']) }} as daily_campaign_id
-    from fields
 )
 
 select *
-from final
+from fields

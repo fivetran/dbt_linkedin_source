@@ -17,4 +17,5 @@ vars:
     creative_history: "{{ source('linkedin','creative_history') }}"
     ad_analytics_by_campaign: "{{ source('linkedin', 'ad_analytics_by_campaign') }}"
 
-  linkedin_ads__passthrough_metrics: []
+  linkedin_ads__campaign_passthrough_metrics: []
+  linkedin_ads__creative_passthrough_metrics: []

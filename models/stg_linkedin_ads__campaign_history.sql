@@ -40,28 +40,12 @@ with base as (
         cast(run_schedule_start as {{ dbt_utils.type_timestamp() }}) as run_schedule_start_at,
         cast(run_schedule_end as {{ dbt_utils.type_timestamp() }}) as run_schedule_end_at,
         cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
-        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at
+        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
+        row_number() over (partition by id order by last_modified_time desc) = 1 as is_latest_version
+
     from macro
-
-), valid_dates as (
-
-    select 
-        *,
-        case 
-            when row_number() over (partition by campaign_id order by version_tag) = 1 then created_at
-            else last_modified_at
-        end as valid_from,
-        lead(last_modified_at) over (partition by campaign_id order by version_tag) as valid_to
-    from fields
-
-), surrogate_key as (
-
-    select 
-        *,
-        {{ dbt_utils.surrogate_key(['campaign_id','version_tag']) }} as campaign_version_id
-    from valid_dates
 
 )
 
 select *
-from surrogate_key
+from fields

@@ -9,7 +9,7 @@
     {"name": "impressions", "datatype": dbt_utils.type_int()}
 ] %}
 
-{{ fivetran_utils.add_pass_through_columns(columns, var('linkedin_ads__passthrough_metrics')) }}
+{{ fivetran_utils.add_pass_through_columns(columns, var('linkedin_ads__campaign_passthrough_metrics')) }}
 
 {{ return(columns) }}
 
