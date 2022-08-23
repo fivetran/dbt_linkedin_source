@@ -72,14 +72,14 @@ By default, this package will select `clicks`, `impressions`, and `cost` from `a
 ```yml
 # dbt_project.yml
 vars:
-    linkedin_ads__campaign_passthrough_metrics: 
+    linkedin_ads__campaign_passthrough_metrics: # pulls from ad_analytics_by_campaign
         - name: "new_custom_field"
           alias: "custom_field"
         - name: "unique_int_field"
           alias: "field_id"
           transform_sql: "cast(field_id as int)"
         - name: "that_field"
-    linkedin_ads__creative_passthrough_metrics: 
+    linkedin_ads__creative_passthrough_metrics: # pulls from ad_analytics_by_creative
         - name: "new_custom_field"
           alias: "custom_field"
         - name: "unique_int_field"

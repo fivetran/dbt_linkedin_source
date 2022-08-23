@@ -11,6 +11,9 @@ sources:
       warn_after: {count: 48, period: hour}
       error_after: {count: 168, period: hour}
       
+    config:
+      enabled: "{{ var('ad_reporting__linkedin_ads_enabled', true) }}"
+
     tables:
       - name: ad_analytics_by_creative
         identifier: "{{ var('linkedin_ads_ad_analytics_by_creative_identifier', 'ad_analytics_by_creative') }}"

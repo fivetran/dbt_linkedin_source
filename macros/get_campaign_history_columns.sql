@@ -1,9 +1,7 @@
 {% macro get_campaign_history_columns() %}
 
 {% set columns = [
-    {"name": "_fivetran_synced", "datatype": dbt_utils.type_timestamp()},
     {"name": "account_id", "datatype": dbt_utils.type_int()},
-    {"name": "associated_entity", "datatype": dbt_utils.type_string()},
     {"name": "audience_expansion_enabled", "datatype": "boolean"},
     {"name": "campaign_group_id", "datatype": dbt_utils.type_int()},
     {"name": "cost_type", "datatype": dbt_utils.type_string()},
