@@ -11,11 +11,9 @@ vars:
   linkedin_ads__creative_passthrough_metrics: # NOTE that this used to be called linkedin__passthrough_metrics
     - name: "my_field_to_include" # Required: Name of the field within the source.
       alias: "field_alias" # Optional: If you wish to alias the field within the staging model.
-      transform_sql: "cast(field_alias as string)" # Optional: If you wish to define the datatype or apply a light transformation.
   linkedin_ads__campaign_passthrough_metrics: # This will pull from `ad_analytics_by_campaign`
     - name: "my_field_to_include"
       alias: "field_alias"
-      transform_sql: "cast(field_alias as string)"
 ```
 
 ## 🎉 Feature Enhancements 🎉
