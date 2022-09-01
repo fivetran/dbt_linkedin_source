@@ -56,6 +56,7 @@ vars:
 ```
 
 ## (Optional) Step 4: Additional configurations
+<details><summary>Expand for configurations</summary>
 
 ### Switching to Local Currency
 Additionally, the package allows you to select whether you want to add in costs in USD or the local currency of the ad. By default, the package uses USD. If you would like to have costs in the local currency, add the following variable to your `dbt_project.yml` file:
@@ -106,8 +107,14 @@ vars:
     linkedin_ads_<default_source_table_name>_identifier: your_table_name 
 ```
 
+</details>
+
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
+<details><summary>Expand for more details</summary>
+
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core™ setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
+
+</details>
 
 # 🔍 Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. Please be aware that these dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
