@@ -1,15 +1,18 @@
 name: 'linkedin_source_integration_tests'
-version: '0.4.1'
+version: '0.5.0'
 profile: 'integration_tests'
 config-version: 2
 
 vars:
   linkedin_source:
-        account_history: "{{ ref('linkedin_account_history_data') }}"
-        ad_analytics_by_creative: "{{ ref('linkedin_ad_analytics_by_creative_data') }}"
-        campaign_group_history: "{{ ref('linkedin_campaign_group_history_data') }}"
-        campaign_history: "{{ ref('linkedin_campaign_history_data') }}"
-        creative_history: "{{ ref('linkedin_creative_history_data') }}"
+    linkedin_ads_account_history_identifier: "linkedin_account_history_data"
+    linkedin_ads_ad_analytics_by_creative_identifier: "linkedin_ad_analytics_by_creative_data"
+    linkedin_ads_campaign_group_history_identifier: "linkedin_campaign_group_history_data"
+    linkedin_ads_campaign_history_identifier: "linkedin_campaign_history_data"
+    linkedin_ads_creative_history_identifier: "linkedin_creative_history_data"
+    linkedin_ads_ad_analytics_by_campaign_identifier: "linkedin_ad_analytics_by_campaign_data"
+
+    linkedin_ads_schema: linkedin_source_integration_tests
 
 seeds:
   linkedin_source_integration_tests:
@@ -17,7 +20,7 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
-        click_uri: "{{ 'string' if target.type == 'bigquery' else 'varchar' }}"
+        click_uri: "{{ 'string' if target.type in ('bigquery', 'spark') else 'varchar' }}"
     linkedin_ad_analytics_by_creative_data:
       +column_types:
         day: timestamp
@@ -33,10 +36,7 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
-    linkedin_creative_history_data:
-      +column_types:
-        created_time: timestamp
-        last_modified_time: timestamp
+        
 dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
