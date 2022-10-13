@@ -20,7 +20,7 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
-        click_uri: "{{ 'string' if target.type in ('bigquery', 'spark') else 'varchar' }}"
+        click_uri: "{{ 'string' if target.type in ('bigquery', '!!!!!!! REPLACE 'spark' WITH 'spark','databricks' OR EQUIV !!!!!!!') else 'varchar' }}"
     linkedin_ad_analytics_by_creative_data:
       +column_types:
         day: timestamp
@@ -39,4 +39,4 @@ seeds:
         
 dispatch:
   - macro_namespace: dbt_utils
-    search_order: ['spark_utils', 'dbt_utils']
+    search_order: ['!!!!!!! REPLACE 'spark' WITH 'spark','databricks' OR EQUIV !!!!!!!_utils', 'dbt_utils']

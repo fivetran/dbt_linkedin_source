@@ -24,10 +24,10 @@ with base as (
         account_id,
         status,
         backfilled as is_backfilled,
-        cast(run_schedule_start as {{ dbt_utils.type_timestamp() }}) as run_schedule_start_at,
-        cast(run_schedule_end as {{ dbt_utils.type_timestamp() }}) as run_schedule_end_at,
-        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
-        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
+        cast(run_schedule_start as {{ dbt.type_timestamp() }}) as run_schedule_start_at,
+        cast(run_schedule_end as {{ dbt.type_timestamp() }}) as run_schedule_end_at,
+        cast(last_modified_time as {{ dbt.type_timestamp() }}) as last_modified_at,
+        cast(created_time as {{ dbt.type_timestamp() }}) as created_at,
         row_number() over (partition by id order by last_modified_time desc) = 1 as is_latest_version
 
     from macro

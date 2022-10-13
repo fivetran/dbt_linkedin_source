@@ -26,8 +26,8 @@ with base as (
         status,
         click_uri,
         call_to_action_label_type,
-        cast(last_modified_time as {{ dbt_utils.type_timestamp() }}) as last_modified_at,
-        cast(created_time as {{ dbt_utils.type_timestamp() }}) as created_at,
+        cast(last_modified_time as {{ dbt.type_timestamp() }}) as last_modified_at,
+        cast(created_time as {{ dbt.type_timestamp() }}) as created_at,
         row_number() over (partition by id order by last_modified_time desc) = 1 as is_latest_version
 
     from macro
@@ -36,7 +36,7 @@ with base as (
 
     select 
         *,
-        {{ dbt_utils.split_part('click_uri', "'?'", 1) }} as base_url,
+        {{ dbt.split_part('click_uri', "'?'", 1) }} as base_url,
         {{ dbt_utils.get_url_host('click_uri') }} as url_host,
         '/' || {{ dbt_utils.get_url_path('click_uri') }} as url_path,
         {{ dbt_utils.get_url_parameter('click_uri', 'utm_source') }} as utm_source,

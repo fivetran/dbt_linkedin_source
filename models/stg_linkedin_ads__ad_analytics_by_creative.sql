@@ -19,7 +19,7 @@ with base as (
 ), fields as (
 
     select
-        {{ dbt_utils.date_trunc('day', 'day') }} as date_day,
+        {{ dbt.date_trunc('day', 'day') }} as date_day,
         creative_id,
         clicks, 
         impressions,
