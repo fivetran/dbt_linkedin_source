@@ -1,13 +1,11 @@
 name: 'linkedin_source'
-version: '0.5.0'
+version: '0.6.0'
 config-version: 2
-require-dbt-version: [">=1.0.0", "<2.0.0"]
-
+require-dbt-version: [">=1.2.0", "<2.0.0"]
 models:
   linkedin_source:
     +materialized: view
     +schema: linkedin_ads_source
-
 vars:
   linkedin_source:
     account_history: "{{ source('linkedin','account_history') }}"
@@ -16,6 +14,5 @@ vars:
     campaign_history: "{{ source('linkedin','campaign_history') }}"
     creative_history: "{{ source('linkedin','creative_history') }}"
     ad_analytics_by_campaign: "{{ source('linkedin', 'ad_analytics_by_campaign') }}"
-
   linkedin_ads__campaign_passthrough_metrics: []
   linkedin_ads__creative_passthrough_metrics: []
