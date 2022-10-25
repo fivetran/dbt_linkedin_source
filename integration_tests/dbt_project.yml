@@ -1,5 +1,5 @@
 name: 'linkedin_source_integration_tests'
-version: '0.5.0'
+version: '0.6.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -39,4 +39,4 @@ seeds:
         
 dispatch:
   - macro_namespace: dbt_utils
-    search_order: ['!!!!!!! REPLACE 'spark' WITH 'spark','databricks' OR EQUIV !!!!!!!_utils', 'dbt_utils']
+    search_order: ['spark_utils', 'dbt_utils']
