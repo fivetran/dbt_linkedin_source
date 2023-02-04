@@ -1,5 +1,5 @@
 name: 'linkedin_source_integration_tests'
-version: '0.6.0'
+version: '0.7.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -20,6 +20,8 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
+        created_at: timestamp
+        last_modified_at: timestamp
         click_uri: "{{ 'string' if target.type in ('bigquery','spark','databricks') else 'varchar' }}"
     linkedin_ad_analytics_by_creative_data:
       +column_types:

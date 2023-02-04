@@ -1,3 +1,18 @@
+# dbt_linkedin_source v0.7.0
+## 🚨 Breaking Changes 🚨
+Due to Linkedin Ads API [change in January 2023](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes?view=li-lms-2022-12#january-2023), there have been updates in the Linkedin Ads Fivetran Connector and therefore, updates to this Linkedin package. 
+
+The following fields have been completely deprecated in the `stg_linkedin_ads__creative_history` model:
+- `type`
+- `call_to_action_label_type`
+- `version_tag`
+
+## Updates
+The following legacy fields have been updated respectively in the connector and [PR #](LINK HERE) includes the below modifications:
+- `last_modified_time` has been updated to `last_modified_at`
+- `created_time` has been updated to `created_at`
+- `status` has been updated to `intended_status`
+
 # dbt_linkedin_source v0.6.0
 
 ## 🚨 Breaking Changes 🚨:

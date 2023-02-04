@@ -59,15 +59,12 @@ models:
   - name: stg_linkedin_ads__creative_history
     description: Each record represents a 'version' of a creative.
     tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - version_tag
-            - creative_id 
     columns:
       - name: creative_id
         description: Unique internal ID representing the creative.
         tests:
           - not_null
+          - unique
 
       - name: last_modified_at
         description: The timestamp of when the version was updated.
@@ -77,23 +74,6 @@ models:
 
       - name: campaign_id
         description: The ID of the campaign the creative belongs to.
-
-      - name: type
-        description: |
-          TEXT_AD - Text with Sponsored Link to landing page on your site.
-          SPONSORED_STATUS_UPDATE - Sponsored status update from a profile page.
-          SPONSORED_INMAILS - Single message ad delivered to the member's inbox
-          SPONSORED_MESSAGE - Conversation ad containing a tree of pre-determined messages delivered to the member's inbox
-          SPONSORED_VIDEO - Sponsored videos.
-          SPONSORED_UPDATE_CAROUSEL - Sponsored Carousels
-          FOLLOW_COMPANY_V2 - Dynamic Follow Ad
-          SPOTLIGHT_V2 - Dynamic Spotlight Ad
-          JOBS_V2 - Dynamic Job Ad
-
-      - name: version_tag
-        description: An integer representation of the version of the creative.
-        tests:
-          - not_null
 
       - name: status
         description: |
@@ -131,9 +111,6 @@ models:
 
       - name: utm_term
         description: The utm_term parameter of the ad, extracted from the `click_uri`.
-
-      - name: call_to_action_label_type
-        description: The labeled call-to-action on this ad.
 
       - name: is_latest_version
         description: Boolean of whether the record is the latest version of the cretive.
