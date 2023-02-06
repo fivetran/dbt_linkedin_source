@@ -8,10 +8,15 @@ The following fields have been completely deprecated in the `stg_linkedin_ads__c
 - `version_tag`
 
 ## Updates
-The following legacy fields have been updated respectively in the connector and [PR #48](https://github.com/fivetran/dbt_linkedin_source/pull/48) includes the below modifications:
-- `last_modified_time` has been updated to `last_modified_at`
-- `created_time` has been updated to `created_at`
-- `status` has been updated to `intended_status`
+- The following legacy fields have been updated respectively in the connector and [PR #48](https://github.com/fivetran/ dbt_linkedin_source/pull/48) includes the below modifications:
+  - `last_modified_time` has been updated to `last_modified_at`
+  - `created_time` has been updated to `created_at`
+  - `status` has been updated to `intended_status`
+- `src_linkedin.yml` have been updated to reflect new definitions for the above updated fields.
+
+## Under the Hood
+- `integration_tests/seeds/linkedin_creative_history_data` has been updated to reflect new fields and deprecated fields
+- Uniqueness testing in `stg_linkedin_ads__creative_history` has been updated to now include `_fivetran_synced` and `last_modified_at` in place of the previous test with `version_tag`. 
 
 # dbt_linkedin_source v0.6.0
 
