@@ -62,6 +62,7 @@ models:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - _fivetran_synced
+            - last_modified_at
             - creative_id 
     columns:
       - name: creative_id

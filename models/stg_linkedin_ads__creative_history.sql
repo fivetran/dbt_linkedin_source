@@ -19,6 +19,7 @@ with base as (
 ), fields as (
 
     select
+        _fivetran_synced,
         id as creative_id,
         campaign_id,
         intended_status as status,
