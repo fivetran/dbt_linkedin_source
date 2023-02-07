@@ -42,7 +42,7 @@ Include the following linkedin_source package version in your `packages.yml` fil
 # packages.yml
 packages:
   - package: fivetran/linkedin_source
-    version: [">=0.6.0", "<0.7.0"]
+    version: [">=0.7.0", "<0.8.0"]
 ```
 
 ## Step 3: Define database and schema variables
