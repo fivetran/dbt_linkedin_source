@@ -22,7 +22,7 @@ with base as (
         _fivetran_synced,
         id as creative_id,
         campaign_id,
-        intended_status as status,
+        coalesce(intended_status, status) as status,
         click_uri,
         cast(coalesce(last_modified_at, last_modified_time) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_at, created_time) as {{ dbt.type_timestamp() }}) as created_at,
