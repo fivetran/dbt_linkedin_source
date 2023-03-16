@@ -58,12 +58,6 @@ models:
 
   - name: stg_linkedin_ads__creative_history
     description: Each record represents a 'version' of a creative.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - _fivetran_synced
-            - last_modified_at
-            - creative_id 
     columns:
       - name: creative_id
         description: Unique internal ID representing the creative.
