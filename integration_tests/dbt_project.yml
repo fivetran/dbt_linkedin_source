@@ -12,7 +12,7 @@ vars:
     linkedin_ads_creative_history_identifier: "linkedin_creative_history_data"
     linkedin_ads_ad_analytics_by_campaign_identifier: "linkedin_ad_analytics_by_campaign_data"
 
-    linkedin_ads_schema: linkedin_source_integration_tests
+    linkedin_ads_schema: linkedin_source_integration_tests_1
 
 seeds:
   linkedin_source_integration_tests:
