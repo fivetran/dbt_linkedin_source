@@ -19,7 +19,6 @@ with base as (
 ), fields as (
 
     select
-        _fivetran_synced,
         id as creative_id,
         campaign_id,
         coalesce(intended_status, status) as status,

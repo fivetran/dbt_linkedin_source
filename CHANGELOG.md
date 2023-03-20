@@ -17,7 +17,7 @@ The following fields have been completely deprecated in the `stg_linkedin_ads__c
 
 ## Under the Hood
 - `integration_tests/seeds/linkedin_creative_history_data` has been updated to reflect new fields and deprecated fields
-- Uniqueness testing in `stg_linkedin_ads__creative_history` has been updated to now include `_fivetran_synced` and `last_modified_at` in place of the previous test with `version_tag`. 
+- `_fivetran_synced` field removed from seed data for `linkedin_ad_analytics_by_campaign_data` integration testing as it is not used in this package's models
 
 # dbt_linkedin_source v0.6.0
 

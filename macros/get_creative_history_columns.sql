@@ -1,7 +1,6 @@
 {% macro get_creative_history_columns() %}
 
 {% set columns = [
-    {"name": "_fivetran_synced", "datatype": dbt.type_timestamp()},
     {"name": "campaign_id", "datatype": dbt.type_int()},
     {"name": "click_uri", "datatype": dbt.type_string()},
     {"name": "created_time", "datatype": dbt.type_timestamp()},
