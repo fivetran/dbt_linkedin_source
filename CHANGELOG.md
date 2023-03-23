@@ -8,7 +8,8 @@ The following fields have been completely deprecated in the `stg_linkedin_ads__c
 - `version_tag`
 
 ## Updates
-- The following legacy fields have been updated respectively in the connector and [PR #48](https://github.com/fivetran/dbt_linkedin_source/pull/48) includes the below modifications:
+[PR #48](https://github.com/fivetran/dbt_linkedin_source/pull/48) includes the below modifications:
+- The following legacy fields have been updated respectively in the connector:
   - `last_modified_time` has been updated to `last_modified_at`
   - `created_time` has been updated to `created_at`
   - `status` has been updated to `intended_status`
