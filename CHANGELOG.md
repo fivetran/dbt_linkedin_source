@@ -1,3 +1,25 @@
+# dbt_linkedin_source v0.7.0
+## 🚨 Breaking Changes 🚨
+Due to Linkedin Ads API [change in January 2023](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes?view=li-lms-2022-12#january-2023), there have been updates in the Linkedin Ads Fivetran Connector and therefore, updates to this Linkedin package. 
+
+The following fields have been completely deprecated in the `stg_linkedin_ads__creative_history` model ([PR #48](https://github.com/fivetran/dbt_linkedin_source/pull/48)):
+- `type`
+- `call_to_action_label_type`
+- `version_tag`
+
+## Updates
+[PR #48](https://github.com/fivetran/dbt_linkedin_source/pull/48) includes the below modifications:
+- The following legacy fields have been updated respectively in the connector:
+  - `last_modified_time` has been updated to `last_modified_at`
+  - `created_time` has been updated to `created_at`
+  - `status` has been updated to `intended_status`
+- `src_linkedin.yml` have been updated to reflect new definitions for the above updated fields.
+- Removing unique column testing from `stg_linkedin__creative_history` as a result of the recent [API version update](https://fivetran.com/docs/applications/linkedin-ads/changelog#january2023) that impacted the `CREATIVE_HISTORY` table. We were recently made aware of an edge case that results in duplicate records for a given `Creative ID` due to a primary key change (`last_modified_time` to `last_modified_at`). Duplicate data will appear if a creative was deleted from the LinkedIn Ads platform during the API update process -- the likelihood of this happening is small and it would only impact deleted creatives.
+
+## Under the Hood
+- `integration_tests/seeds/linkedin_creative_history_data` has been updated to reflect new fields and deprecated fields
+- `_fivetran_synced` field removed from seed data for `linkedin_ad_analytics_by_campaign_data` integration testing as it is not used in this package's models
+
 # dbt_linkedin_source v0.6.0
 
 ## 🚨 Breaking Changes 🚨:

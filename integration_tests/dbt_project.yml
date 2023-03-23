@@ -1,5 +1,5 @@
 name: 'linkedin_source_integration_tests'
-version: '0.6.0'
+version: '0.7.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -12,7 +12,7 @@ vars:
     linkedin_ads_creative_history_identifier: "linkedin_creative_history_data"
     linkedin_ads_ad_analytics_by_campaign_identifier: "linkedin_ad_analytics_by_campaign_data"
 
-    linkedin_ads_schema: linkedin_source_integration_tests
+    linkedin_ads_schema: linkedin_source_integration_tests_1
 
 seeds:
   linkedin_source_integration_tests:
@@ -20,7 +20,11 @@ seeds:
       +column_types:
         created_time: timestamp
         last_modified_time: timestamp
+        created_at: timestamp
+        last_modified_at: timestamp
         click_uri: "{{ 'string' if target.type in ('bigquery','spark','databricks') else 'varchar' }}"
+        intended_status: "{{ 'string' if target.type in ('bigquery','spark','databricks') else 'varchar' }}"
+        status: "{{ 'string' if target.type in ('bigquery','spark','databricks') else 'varchar' }}"
     linkedin_ad_analytics_by_creative_data:
       +column_types:
         day: timestamp

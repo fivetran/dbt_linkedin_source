@@ -45,44 +45,32 @@ sources:
             description: Unique internal ID representing the creative.
 
           - name: last_modified_time
-            description: The timestamp of when the version was updated.
+            description: The timestamp of when the version was updated (Linkedin Ads pre-January 2023 API Update).
 
+          - name: last_modified_at
+            description: The timestamp of when the version was updated (Linkedin Ads post-January 2023 API Update).
+          
           - name: created_time
-            description: The timestamp of when the creative was created.
+            description: The timestamp of when the creative was created (Linkedin Ads pre-January 2023 API Update).
+
+          - name: created_at
+            description: The timestamp of when the creative was created (Linkedin Ads post-January 2023 API Update).
 
           - name: campaign_id
             description: The ID of the campaign the creative belongs to.
-
-          - name: status
-            description: |
-                ACTIVE - Creative creation is complete and creative is available for review and serve.
-                PAUSED - Creative creation is complete and creative is current, but should temporarily not be served. This status is not valid upon creation.
-                DRAFT - Creative creation is incomplete and may still be edited.
-                ARCHIVED - Creative creation is complete, but creative should not be served and should be separated from non-archived creatives in any UI.
-                CANCELED - Creative is permanently canceled.
-
-          - name: version_tag
-            description: An integer representation of the version of the creative.
-
-          - name: type 
-            description: |
-                TEXT_AD - Text with Sponsored Link to landing page on your site.
-                SPONSORED_STATUS_UPDATE - Sponsored status update from a profile page.
-                SPONSORED_INMAILS - Single message ad delivered to the member's inbox
-                SPONSORED_MESSAGE - Conversation ad containing a tree of pre-determined messages delivered to the member's inbox
-                SPONSORED_VIDEO - Sponsored videos.
-                SPONSORED_UPDATE_CAROUSEL - Sponsored Carousels
-                FOLLOW_COMPANY_V2 - Dynamic Follow Ad
-                SPOTLIGHT_V2 - Dynamic Spotlight Ad
-                JOBS_V2 - Dynamic Job Ad
 
           - name: click_uri
             description: |
                 Required when creative type is TEXT_AD. Maximum character limit of 500 after URL encoding all special characters. 
                 Limit does not include the "https://" prefix.
 
-          - name: call_to_action_label_type
-            description: The labeled call-to-action on this ad.
+          - name: intended_status
+            description: |
+                ACTIVE - Creative creation is complete and creative is available for review and serve.
+                PAUSED - Creative creation is complete and creative is current, but should temporarily not be served. This status is not valid upon creation.
+                DRAFT - Creative creation is incomplete and may still be edited.
+                ARCHIVED - Creative creation is complete, but creative should not be served and should be separated from non-archived creatives in any UI.
+                CANCELED - Creative is permanently canceled.
 
       - name: campaign_history
         description: Each record represents a 'version' of a campaign.

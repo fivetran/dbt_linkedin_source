@@ -66,6 +66,7 @@ steps:
           shell: [ "/bin/bash", "-e", "-c" ]
           environment:
             - "BASH_ENV=/tmp/.bashrc"
+            - "CI_DATABRICKS_DBT_CATALOG"
             - "CI_DATABRICKS_DBT_HOST"
             - "CI_DATABRICKS_DBT_HTTP_PATH"
             - "CI_DATABRICKS_DBT_TOKEN"

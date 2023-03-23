@@ -21,14 +21,11 @@ with base as (
     select
         id as creative_id,
         campaign_id,
-        type,
-        cast(version_tag as numeric) as version_tag,
-        status,
+        coalesce(intended_status, status) as status,
         click_uri,
-        call_to_action_label_type,
-        cast(last_modified_time as {{ dbt.type_timestamp() }}) as last_modified_at,
-        cast(created_time as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by id order by last_modified_time desc) = 1 as is_latest_version
+        cast(coalesce(last_modified_at, last_modified_time) as {{ dbt.type_timestamp() }}) as last_modified_at,
+        cast(coalesce(created_at, created_time) as {{ dbt.type_timestamp() }}) as created_at,
+        row_number() over (partition by id order by coalesce(last_modified_at, last_modified_time) desc) = 1 as is_latest_version
 
     from macro
 
