@@ -23,3 +23,4 @@ dbt test --target "$db"
 dbt run --vars '{linkedin_ads__use_local_currency: True}' --target "$db" --full-refresh
 dbt test --target "$db"
 ### END VARS CHUNK, REMOVE IF NOT USING
+dbt run-operation fivetran_utils.drop_schemas_automation --target "$db"
