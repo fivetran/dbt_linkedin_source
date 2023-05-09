@@ -40,8 +40,8 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 ```
 
-## Step 2: Install the package
-Include the following linkedin_source package version in your `packages.yml` file.
+## Step 2: Install the package (skip if also using the `linkedin` transformation package)
+If you  are **not** using the [Linkedin transformation package](https://github.com/fivetran/dbt_linkedin), include the following package version in your `packages.yml` file. If you are installing the transform package, the source package is automatically installed as a dependency.
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 ```yml
 # packages.yml
