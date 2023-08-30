@@ -1,3 +1,5 @@
+ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
+
 {{ config(enabled=var('ad_reporting__linkedin_ads_enabled', True)) }}
 
 with base as (
@@ -15,6 +17,12 @@ macro as (
                 staging_columns=get_ad_analytics_by_campaign_columns()
             )
         }}
+    
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_union_schemas', 
+            union_database_variable='linkedin_union_databases') 
+        }}
+
     from base
 ),
 
