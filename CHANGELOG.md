@@ -8,12 +8,10 @@
 - To distinguish which source each field comes from, added `source_relation` column in each staging model and applied the `fivetran_utils.source_relation` macro.
 - Updated tests to account for the new `source_relation` column.
 
-# dbt_linkedin_source v0.UPDATE.UPDATE
-
- ## Under the Hood:
-
+[PR #51](https://github.com/fivetran/dbt_linkedin_source/pull/51) includes the following updates:
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
 - Updated the pull request [templates](/.github).
+
 # dbt_linkedin_source v0.7.0
 ## 🚨 Breaking Changes 🚨
 Due to Linkedin Ads API [change in January 2023](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes?view=li-lms-2022-12#january-2023), there have been updates in the Linkedin Ads Fivetran Connector and therefore, updates to this Linkedin package. 
