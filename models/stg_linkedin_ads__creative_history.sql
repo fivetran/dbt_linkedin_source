@@ -1,5 +1,3 @@
-ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
-
 {{ config(enabled=var('ad_reporting__linkedin_ads_enabled', True)) }}
 
 with base as (
@@ -27,6 +25,7 @@ with base as (
 ), fields as (
 
     select
+        source_relation,
         id as creative_id,
         campaign_id,
         coalesce(intended_status, status) as status,

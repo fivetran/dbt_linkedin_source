@@ -47,7 +47,7 @@ If you  are **not** using the [Linkedin transformation package](https://github.c
 # packages.yml
 packages:
   - package: fivetran/linkedin_source
-    version: [">=0.7.0", "<0.8.0"]
+    version: [">=0.8.0", "<0.9.0"]
 ```
 
 ## Step 3: Define database and schema variables

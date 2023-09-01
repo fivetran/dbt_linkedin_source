@@ -1,5 +1,3 @@
-ADD source_relation WHERE NEEDED + CHECK JOINS AND WINDOW FUNCTIONS! (Delete this line when done.)
-
 {{ config(enabled=var('ad_reporting__linkedin_ads_enabled', True)) }}
 
 with base as (
@@ -29,6 +27,7 @@ macro as (
 fields as (
     
     select 
+        source_relation,
         {{ dbt.date_trunc('day', 'day') }} as date_day,
         campaign_id,
         clicks,

@@ -1,4 +1,3 @@
-UPDATE TESTS!!! (delete line when done.)
 version: 2
 
 models:
@@ -14,6 +13,7 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
+
       - name: creative_id
         description: The ID of the related creative.
         tests:
@@ -44,6 +44,7 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
+
       - name: campaign_id
         description: The ID of the related creative.
         tests:
@@ -68,6 +69,7 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
+
       - name: creative_id
         description: Unique internal ID representing the creative.
         tests:
@@ -120,7 +122,7 @@ models:
         description: The utm_term parameter of the ad, extracted from the `click_uri`.
 
       - name: is_latest_version
-        description: Boolean of whether the record is the latest version of the cretive.
+        description: Boolean of whether the record is the latest version of the creative.
 
   - name: stg_linkedin_ads__campaign_history
     description: Each record represents a 'version' of a campaign.
@@ -133,6 +135,7 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
+
       - name: campaign_id
         description: Unique internal ID representing the campaign.
         tests:
@@ -256,6 +259,7 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
+
       - name: campaign_group_id
         description: Unique internal ID representing the campaign group.
         tests:
@@ -309,6 +313,7 @@ models:
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
+
       - name: account_id
         description: Unique internal ID representing the account.
         tests:
