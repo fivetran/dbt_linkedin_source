@@ -64,12 +64,12 @@ vars:
 <details><summary>Expand for configurations</summary>
 
 ### Union multiple connectors
-If you have multiple linkedin connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `linkedin_union_schemas` OR `linkedin_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
+If you have multiple linkedin connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `linkedin_ads_union_schemas` OR `linkedin_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
 
 ```yml
 vars:
-    linkedin_union_schemas: ['linkedin_usa','linkedin_canada'] # use this if the data is in different schemas/datasets of the same database/project
-    linkedin_union_databases: ['linkedin_usa','linkedin_canada'] # use this if the data is in different databases/projects but uses the same schema name
+    linkedin_ads_union_schemas: ['linkedin_usa','linkedin_canada'] # use this if the data is in different schemas/datasets of the same database/project
+    linkedin_ads_union_databases: ['linkedin_usa','linkedin_canada'] # use this if the data is in different databases/projects but uses the same schema name
 ```
 Please be aware that the native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
 

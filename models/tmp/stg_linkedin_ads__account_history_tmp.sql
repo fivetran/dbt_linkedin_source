@@ -8,7 +8,7 @@
         default_database=target.database,
         default_schema='linkedin',
         default_variable='account_history',
-        union_schema_variable='linkedin_union_schemas',
-        union_database_variable='linkedin_union_databases'
+        union_schema_variable='linkedin_ads_union_schemas',
+        union_database_variable='linkedin_ads_union_databases'
     )
 }}

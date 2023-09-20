@@ -17,8 +17,8 @@ macro as (
         }}
     
         {{ fivetran_utils.source_relation(
-            union_schema_variable='linkedin_union_schemas', 
-            union_database_variable='linkedin_union_databases') 
+            union_schema_variable='linkedin_ads_union_schemas', 
+            union_database_variable='linkedin_ads_union_databases') 
         }}
 
     from base
