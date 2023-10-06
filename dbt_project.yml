@@ -8,11 +8,11 @@ models:
     +schema: linkedin_ads_source
 vars:
   linkedin_source:
-    account_history: "{{ source('linkedin','account_history') }}"
-    ad_analytics_by_creative: "{{ source('linkedin','ad_analytics_by_creative') }}"
-    campaign_group_history: "{{ source('linkedin','campaign_group_history') }}"
-    campaign_history: "{{ source('linkedin','campaign_history') }}"
-    creative_history: "{{ source('linkedin','creative_history') }}"
-    ad_analytics_by_campaign: "{{ source('linkedin', 'ad_analytics_by_campaign') }}"
+    account_history: "{{ source('linkedin_ads','account_history') }}"
+    ad_analytics_by_creative: "{{ source('linkedin_ads','ad_analytics_by_creative') }}"
+    campaign_group_history: "{{ source('linkedin_ads','campaign_group_history') }}"
+    campaign_history: "{{ source('linkedin_ads','campaign_history') }}"
+    creative_history: "{{ source('linkedin_ads','creative_history') }}"
+    ad_analytics_by_campaign: "{{ source('linkedin_ads', 'ad_analytics_by_campaign') }}"
   linkedin_ads__campaign_passthrough_metrics: []
   linkedin_ads__creative_passthrough_metrics: []
