@@ -6,12 +6,12 @@
 
 | current  | previous |
 |----------|----------|
-|microsoft_ads_account_performance_daily_report_identifier | microsoft_ads_account_daily_report_identifier |
-|microsoft_ads_ad_group_performance_daily_report_identifier | microsoft_ads_ad_group_daily_report_identifier|
-|microsoft_ads_ad_performance_daily_report_identifier | microsoft_ads_ad_daily_report_identifier|
-|microsoft_ads_campaign_performance_daily_report_identifier | microsoft_ads_campaign_daily_report_identifier|
-|microsoft_ads_keyword_performance_daily_report_identifier | microsoft_ads_keyword_daily_report_identifier|
-|microsoft_ads_search_query_performance_daily_report_identifier | microsoft_ads_search_query_daily_report_identifier|
+| linkedin_ads_account_history_identifier | linkedin_account_history_identifier
+| linkedin_ads_ad_analytics_by_creative_identifier | linkedin_ad_analytics_by_creative_identifier
+| linkedin_ads_campaign_group_history_identifier | linkedin_campaign_group_history_identifier
+| linkedin_ads_campaign_history_identifier | linkedin_campaign_history_identifier
+| linkedin_ads_creative_history_identifier | linkedin_creative_history_identifier
+| linkedin_ads_ad_analytics_by_campaign_identifier | linkedin_ad_analytics_by_campaign_identifier
 
 - If you are using the previous identifier, be sure to update to the current version!
 
