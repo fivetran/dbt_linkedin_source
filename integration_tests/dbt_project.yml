@@ -14,6 +14,11 @@ vars:
 
     linkedin_ads_schema: linkedin_source_integration_tests_3
 
+models:
+  linkedin_source:
+    tmp:
+      +materialized: table
+
 seeds:
   linkedin_source_integration_tests:
     linkedin_creative_history_data:
