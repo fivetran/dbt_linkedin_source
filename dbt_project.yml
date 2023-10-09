@@ -4,7 +4,7 @@ config-version: 2
 require-dbt-version: [">=1.3.0", "<2.0.0"]
 models:
   linkedin_source:
-    +materialized: table
+    +materialized: view
     +schema: linkedin_ads_source
 vars:
   linkedin_source:
