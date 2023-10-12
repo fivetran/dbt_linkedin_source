@@ -47,7 +47,7 @@ If you  are **not** using the [Linkedin transformation package](https://github.c
 # packages.yml
 packages:
   - package: fivetran/linkedin_source
-    version: [">=0.7.0", "<0.8.0"]
+    version: [">=0.8.0", "<0.9.0"]
 ```
 
 ## Step 3: Define database and schema variables
@@ -61,7 +61,17 @@ vars:
 ```
 
 ## (Optional) Step 4: Additional configurations
-<details><summary>Expand for configurations</summary>
+### Union multiple connectors
+If you have multiple linkedin connectors in Fivetran and would like to use this package on all of them simultaneously, we have provided functionality to do so. The package will union all of the data together and pass the unioned table into the transformations. You will be able to see which source it came from in the `source_relation` column of each model. To use this functionality, you will need to set either the `linkedin_ads_union_schemas` OR `linkedin_ads_union_databases` variables (cannot do both) in your root `dbt_project.yml` file:
+
+```yml
+vars:
+    linkedin_ads_union_schemas: ['linkedin_usa','linkedin_canada'] # use this if the data is in different schemas/datasets of the same database/project
+    linkedin_ads_union_databases: ['linkedin_usa','linkedin_canada'] # use this if the data is in different databases/projects but uses the same schema name
+```
+Please be aware that the native `source.yml` connection set up in the package will not function when the union schema/database feature is utilized. Although the data will be correctly combined, you will not observe the sources linked to the package models in the Directed Acyclic Graph (DAG). This happens because the package includes only one defined `source.yml`.
+
+To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
 ### Switching to Local Currency
 Additionally, the package allows you to select whether you want to add in costs in USD or the local currency of the ad. By default, the package uses USD. If you would like to have costs in the local currency, add the following variable to your `dbt_project.yml` file:
@@ -111,8 +121,6 @@ If an individual source table has a different name than the package expects, add
 vars:
     linkedin_ads_<default_source_table_name>_identifier: your_table_name 
 ```
-
-</details>
 
 ## (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>

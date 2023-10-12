@@ -14,11 +14,18 @@ with base as (
                 staging_columns=get_campaign_history_columns()
             )
         }}
+    
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_ads_union_schemas', 
+            union_database_variable='linkedin_ads_union_databases') 
+        }}
+
     from base
 
 ), fields as (
 
     select 
+        source_relation,
         id as campaign_id,
         name as campaign_name,
         cast(version_tag as numeric) as version_tag,
@@ -43,7 +50,7 @@ with base as (
         cast(run_schedule_end as {{ dbt.type_timestamp() }}) as run_schedule_end_at,
         cast(last_modified_time as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(created_time as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by id order by last_modified_time desc) = 1 as is_latest_version
+        row_number() over (partition by source_relation, id order by last_modified_time desc) = 1 as is_latest_version
 
     from macro
 

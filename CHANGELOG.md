@@ -1,9 +1,35 @@
-# dbt_linkedin_source v0.UPDATE.UPDATE
+# dbt_linkedin_source v0.8.0
+[PR #54](https://github.com/fivetran/dbt_linkedin_source/pull/54) includes the following updates:
 
- ## Under the Hood:
+## Breaking changes
+- Updated materializations of non-`tmp` staging models from views to tables. This is to bring the materializations into alignment with other ad reporting packages and eliminate errors in Redshift. 
+- Updated the name of the source created by this package from `linkedin` to `linkedin_ads`. This was to bring the naming used in this package in alignment with our other ad packages and for compatibility with the union schema feature.
+  - ❗ If you are using this source, you will need to update the name.
+- Updated the following identifiers for consistency with the source name and compatibility with the union schema feature:
 
+| current  | previous |
+|----------|----------|
+| linkedin_ads_account_history_identifier | linkedin_account_history_identifier
+| linkedin_ads_ad_analytics_by_creative_identifier | linkedin_ad_analytics_by_creative_identifier
+| linkedin_ads_campaign_group_history_identifier | linkedin_campaign_group_history_identifier
+| linkedin_ads_campaign_history_identifier | linkedin_campaign_history_identifier
+| linkedin_ads_creative_history_identifier | linkedin_creative_history_identifier
+| linkedin_ads_ad_analytics_by_campaign_identifier | linkedin_ad_analytics_by_campaign_identifier
+
+- If you are using the previous identifier, be sure to update to the current version!
+
+## Feature update 🎉
+- Unioning capability! This adds the ability to union source data from multiple linkedin connectors. Refer to the [Union Multiple Connectors README section](https://github.com/fivetran/dbt_linkedin_source/blob/main/README.md#union-multiple-connectors) for more details.
+
+## Under the hood 🚘
+- Updated tmp models to union source data using the `fivetran_utils.union_data` macro. 
+- To distinguish which source each field comes from, added `source_relation` column in each staging model and applied the `fivetran_utils.source_relation` macro.
+- Updated tests to account for the new `source_relation` column.
+
+[PR #51](https://github.com/fivetran/dbt_linkedin_source/pull/51) includes the following updates:
 - Incorporated the new `fivetran_utils.drop_schemas_automation` macro into the end of each Buildkite integration test job.
 - Updated the pull request [templates](/.github).
+
 # dbt_linkedin_source v0.7.0
 ## 🚨 Breaking Changes 🚨
 Due to Linkedin Ads API [change in January 2023](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/recent-changes?view=li-lms-2022-12#january-2023), there have been updates in the Linkedin Ads Fivetran Connector and therefore, updates to this Linkedin package. 

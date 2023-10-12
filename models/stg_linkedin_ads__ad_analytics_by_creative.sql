@@ -14,11 +14,18 @@ with base as (
                 staging_columns=get_ad_analytics_by_creative_columns()
             )
         }}
+    
+        {{ fivetran_utils.source_relation(
+            union_schema_variable='linkedin_ads_union_schemas', 
+            union_database_variable='linkedin_ads_union_databases') 
+        }}
+
     from base
 
 ), fields as (
 
     select
+        source_relation,
         {{ dbt.date_trunc('day', 'day') }} as date_day,
         creative_id,
         clicks, 
