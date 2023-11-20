@@ -20,6 +20,6 @@ nullif({{ split }},'')
 case 
     when regexp_extract({{ field }}, concat({{ formatted_url_parameter }}, '([^&]+)'), 1) != ''
     then regexp_extract({{ field }}, concat({{ formatted_url_parameter }}, '([^&]+)'), 1)
-    else null end #}
+    else null end
 
 {%- endmacro %}
