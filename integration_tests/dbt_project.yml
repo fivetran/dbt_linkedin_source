@@ -43,4 +43,4 @@ seeds:
         
 dispatch:
   - macro_namespace: dbt_utils
-    search_order: ['linkedin_source', 'spark_utils', 'dbt_utils']
+    search_order: ['spark_utils', 'dbt_utils']
