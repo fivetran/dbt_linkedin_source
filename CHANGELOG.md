@@ -1,3 +1,7 @@
+# dbt_linkedin_source v0.8.1
+[PR #56](https://github.com/fivetran/dbt_linkedin_source/pull/56) includes the following updates:
+- Added Databricks shim for dbt_utils macro `get_url_parameter()`.
+
 # dbt_linkedin_source v0.8.0
 [PR #54](https://github.com/fivetran/dbt_linkedin_source/pull/54) includes the following updates:
 
