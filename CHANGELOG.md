@@ -1,6 +1,6 @@
 # dbt_linkedin_source v0.8.1
 [PR #56](https://github.com/fivetran/dbt_linkedin_source/pull/56) includes the following updates:
-- Created macro `extract_uri_parameter` for use in the `stg_linkedin_ads__creative_history`. This was added to create special logic for Databricks instances not supported by `dbt_utils.get_url_parameter()`.
+- Created macro `extract_url_parameter` for use in the `stg_linkedin_ads__creative_history`. This was added to create special logic for Databricks instances not supported by `dbt_utils.get_url_parameter()`.
 
 # dbt_linkedin_source v0.8.0
 [PR #54](https://github.com/fivetran/dbt_linkedin_source/pull/54) includes the following updates:
