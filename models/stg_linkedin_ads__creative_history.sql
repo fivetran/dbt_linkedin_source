@@ -43,11 +43,11 @@ with base as (
         {{ dbt.split_part('click_uri', "'?'", 1) }} as base_url,
         {{ dbt_utils.get_url_host('click_uri') }} as url_host,
         '/' || {{ dbt_utils.get_url_path('click_uri') }} as url_path,
-        {{ extract_uri_parameter('click_uri', 'utm_source') }} as utm_source,
-        {{ extract_uri_parameter('click_uri', 'utm_medium') }} as utm_medium,
-        {{ extract_uri_parameter('click_uri', 'utm_campaign') }} as utm_campaign,
-        {{ extract_uri_parameter('click_uri', 'utm_content') }} as utm_content,
-        {{ extract_uri_parameter('click_uri', 'utm_term') }} as utm_term
+        {{ fivetran_utils.extract_uri_parameter('click_uri', 'utm_source') }} as utm_source,
+        {{ fivetran_utils.extract_uri_parameter('click_uri', 'utm_medium') }} as utm_medium,
+        {{ fivetran_utils.extract_uri_parameter('click_uri', 'utm_campaign') }} as utm_campaign,
+        {{ fivetran_utils.extract_uri_parameter('click_uri', 'utm_content') }} as utm_content,
+        {{ fivetran_utils.extract_uri_parameter('click_uri', 'utm_term') }} as utm_term
     
     from fields
 )
