@@ -32,7 +32,11 @@ with base as (
         click_uri,
         cast(coalesce(last_modified_at, last_modified_time) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_at, created_time) as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by source_relation, id order by coalesce(last_modified_at, last_modified_time) desc) = 1 as is_latest_version
+        {% if var('linkedin_ads_union_schemas', false) or var('linkedin_ads_union_databases', false) %}
+            row_number() over (partition by source_relation, id order by coalesce(last_modified_at, last_modified_time) desc) = 1 as is_latest_version
+        {% else %}
+            row_number() over (partition by id order by coalesce(last_modified_at, last_modified_time) desc) = 1 as is_latest_version
+        {% endif %}
 
     from macro
 
