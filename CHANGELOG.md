@@ -1,3 +1,8 @@
+''' # dbt_linkedin_source v0.8.1
+[PR #]() includes the following updates: ## Bug Fixes - This package now leverages the new `linkedin_ads_extract_url_parameter()` for use in parsing out url parameters. This was added to create special logic for Databricks instances not supported by `dbt_utils.get_url_parameter()`.
+  - This macro will be replaced with the `fivetran_utils.extract_url_parameter()` in the next breaking change.
+## Under the Hood - Included auto-releaser GitHub Actions workflow to automate future releases. '''
+
 # dbt_linkedin_source v0.8.0
 [PR #54](https://github.com/fivetran/dbt_linkedin_source/pull/54) includes the following updates:
 
