@@ -1,6 +1,6 @@
 {% macro linkedin_ads_extract_url_parameter(field, url_parameter) -%}
 
-{{ adapter.dispatch('linkedin_ads_extract_url_parameter', 'linkedin_source') (field, url_parameter) }}
+{{ return(adapter.dispatch('linkedin_ads_extract_url_parameter', 'linkedin_source') (field, url_parameter)) }}
 
 {% endmacro %}
 
