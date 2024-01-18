@@ -1,3 +1,8 @@
+# dbt_linkedin_source v0.8.2
+[PR #65](https://github.com/fivetran/dbt_linkedin_source/pull/65) includes the following updates:
+- Updated the determination of the `is_latest_version` flag for model `stg_linkedin_ads__creative_history` to accommodate Fivetran connectors that existed prior to the [January 2023 Fivetran connector update](https://fivetran.com/docs/applications/linkedin-ads/changelog#january2023).
+  - Specifically for these connectors, the new `last_modified_at` field was retroactively filled with a default value of 1970-01-01 instead of null values. Consequently, the [coalesce of line 35](https://github.com/fivetran/dbt_linkedin_source/blob/main/models/stg_linkedin_ads__creative_history.sql#L35) could only use the value from `last_modified_at`. To address this, we have adjusted the coalesce order to prioritize the previous `last_modified_time` and prevent it from being overridden by the default values mentioned.
+
 # dbt_linkedin_source v0.8.1
 
 [PR #64](https://github.com/fivetran/dbt_linkedin_source/pull/64) includes the following updates:

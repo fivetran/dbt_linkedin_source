@@ -32,7 +32,7 @@ with base as (
         click_uri,
         cast(coalesce(last_modified_at, last_modified_time) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_at, created_time) as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by source_relation, id order by coalesce(last_modified_at, last_modified_time) desc) = 1 as is_latest_version
+        row_number() over (partition by source_relation, id order by coalesce(last_modified_time, last_modified_at) desc) = 1 as is_latest_version
 
     from macro
 
