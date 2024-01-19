@@ -1,9 +1,9 @@
 # dbt_linkedin_source v0.8.2
 [PR #66](https://github.com/fivetran/dbt_linkedin_source/pull/66) includes the following updates:
 ## Bug Fixes
-- Updated the determination of the columns `is_latest_version`, `last_modified_at`, and `created_at` for model `stg_linkedin_ads__creative_history` to accommodate Fivetran connectors that existed prior to the [January 2023 Fivetran connector update](https://fivetran.com/docs/applications/linkedin-ads/changelog#january2023).
-  - Specifically for these connectors, the new source `last_modified_at` field was retroactively filled with a default value of 1970-01-01 instead of null values. Consequently, the [coalesce of line 35](https://github.com/fivetran/dbt_linkedin_source/blob/main/models/stg_linkedin_ads__creative_history.sql#L35) could only use the value from `last_modified_at`. To address this, we have adjusted the coalesce order to prioritize the previous `last_modified_time` and prevent it from being overridden by the default values mentioned.
-  - Updated the coalesce order for determining `status` and `created_at` in this model for consistency. 
+- Updated the determination of the columns `is_latest_version`, `last_modified_at`, `status`, and `created_at` for model `stg_linkedin_ads__creative_history` to accommodate Fivetran connectors that existed prior to the [January 2023 Fivetran connector update](https://fivetran.com/docs/applications/linkedin-ads/changelog#january2023).
+  - Specifically for these connectors, the new source `last_modified_at` field was retroactively filled with a default value of 1970-01-01 instead of null values. Consequently, the [coalesce of line 35](https://github.com/fivetran/dbt_linkedin_source/blob/main/models/stg_linkedin_ads__creative_history.sql#L35) could only use the value from `last_modified_at`. To address this, we have adjusted the coalesce order to prioritize the previous `last_modified_time` and prevent it from being overridden by the default values mentioned for columns `is_latest_version` and `last_modified_at`.
+  - Updated the coalesce order for determining `status` and `created_at` for consistency. 
 
 # dbt_linkedin_source v0.8.1
 
