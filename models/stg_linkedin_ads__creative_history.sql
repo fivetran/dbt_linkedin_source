@@ -28,7 +28,7 @@ with base as (
         source_relation,
         id as creative_id,
         campaign_id,
-        coalesce(intended_status, status) as status,
+        coalesce(status, intended_status) as status,
         click_uri,
         cast(coalesce(last_modified_time, last_modified_at) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_time, created_at) as {{ dbt.type_timestamp() }}) as created_at,
