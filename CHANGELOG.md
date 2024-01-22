@@ -1,8 +1,8 @@
 # dbt_linkedin_source v0.8.2
 [PR #66](https://github.com/fivetran/dbt_linkedin_source/pull/66) includes the following updates:
 ## Bug Fixes
-- Adjusted column determination logic (`is_latest_version`, `last_modified_at`, `status`, `created_at`) in model `stg_linkedin_ads__creative_history` for pre-January 2023 Fivetran connectors. 
-  - This ensures proper handling of retroactively filled `last_modified_at` values and maintained consistency in coalesce order for `status` and `created_at`.
+- Adjusted the logic for determining the values of the `is_latest_version`, `last_modified_at`, `status`, and `created_at` fields in the `stg_linkedin_ads__creative_history` model for pre-January 2023 Fivetran connectors. 
+  - This ensures proper handling of retroactively filled `last_modified_at` values and maintains consistency in the `COALESCE` ordering for the `status` and `created_at` fields.
   - See the [January 2023 Fivetran connector release notes](https://fivetran.com/docs/applications/linkedin-ads/changelog#january2023) for more information.
 
 # dbt_linkedin_source v0.8.1
