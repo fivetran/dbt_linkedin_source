@@ -38,41 +38,21 @@ fields as (
         cost_in_usd as cost
         {% endif %}
 
+        {% for conversion in var('linkedin_ads__conversion_fields') %}
+            , coalesce({{ conversion }}, 0) as {{ conversion }}
+        {% endfor %}
 
- 
-        {%- set check = [] %}
-        {%- for field in var('linkedin_ads__campaign_passthrough_metrics') -%}
-            {%- set field_name = field.alias|default(field.name)|lower %}
-            {% if field_name in var('linkedin_ads__conversion_fields') %}
-                {% do check.append(field_name) %}
-            {% endif %}
-            {{ log(field_name, info=True) }}
-        {%- endfor %}
-
-        {{ log(check, info=True) }}
-
-        {%- for metric in var('linkedin_ads__conversion_fields') -%}
-            {% if metric not in check %}
-            {{ log(metric, info=True) }}
-                , {{ metric }}
-            {% endif %}
-        {%- endfor %}
-
-        {# 
-            Adapted from fivetran_utils.fill_pass_through_columns() macro. 
-            Ensures that downstream summations work if a connector schema is missing one of your `linkedin_ads__conversion_passthrough_metrics`
-        #}
         {% if var('linkedin_ads__campaign_passthrough_metrics') %}
             {% for field in var('linkedin_ads__campaign_passthrough_metrics') %}
-                {% if field.transform_sql %}
-                    , coalesce(cast({{ field.transform_sql }} as {{ dbt.type_float() }}), 0) as {{ field.alias if field.alias else field.name }}
-                {% else %}
-                    , coalesce(cast({{ field.alias if field.alias else field.name }} as {{ dbt.type_float() }}), 0) as {{ field.alias if field.alias else field.name }}
+                {% if (field.alias if field.alias else field.name) not in var('linkedin_ads__conversion_fields') %}
+                    {% if field.transform_sql %}
+                        , coalesce(cast({{ field.transform_sql }} as {{ dbt.type_float() }}), 0) as {{ field.alias if field.alias else field.name }}
+                    {% else %}
+                        , coalesce(cast({{ field.alias if field.alias else field.name }} as {{ dbt.type_float() }}), 0) as {{ field.alias if field.alias else field.name }}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         {% endif %}
-
-        -- {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__campaign_passthrough_metrics') }}
 
     from macro
 )

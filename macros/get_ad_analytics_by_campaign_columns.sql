@@ -10,22 +10,25 @@
     {"name": "conversion_value_in_local_currency", "datatype": dbt.type_numeric()}
 ] %}
 
--- {# 
---     Reach and Frequency are not included in downstream models by default, though they are included in the staging model.
---     The below ensures that users can add Reach and Frequency to downstream models with the `facebook_ads__basic_ad_passthrough_metrics` variable
---     while avoiding duplicate column errors.
---  #}
 {% set unique_passthrough = var('linkedin_ads__campaign_passthrough_metrics') %}
-{% for field in var('linkedin_ads__conversion_fields') %}
-    {% for passthrough_fields in unique_passthrough %}
-        {% if field|lower not in passthrough_fields.name %}
-            {% do unique_passthrough.append({"name": field, "datatype": dbt.type_int()}) %}
+
+{%- for conversion in var('linkedin_ads__conversion_fields') %}
+    {% set check = [] -%}
+
+    {% for field in var('linkedin_ads__campaign_passthrough_metrics') %}
+        {%- set field_name = field.alias|default(field.name)|lower %}
+        {% if conversion|lower == field_name %}
+            {%- do check.append(conversion) %}
         {% endif %}
     {% endfor %}
-{% endfor %}
+
+    {% if conversion|lower not in check %}
+    {% do unique_passthrough.append({"name": conversion}) %}
+    {% endif %}
+    
+{% endfor -%}
 
 {{ fivetran_utils.add_pass_through_columns(columns, unique_passthrough) }}
-
 
 {{ return(columns) }}
 
