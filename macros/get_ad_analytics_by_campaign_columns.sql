@@ -6,29 +6,14 @@
     {"name": "cost_in_local_currency", "datatype": dbt.type_numeric()},
     {"name": "cost_in_usd", "datatype": dbt.type_numeric()},
     {"name": "day", "datatype": dbt.type_timestamp()},
-    {"name": "impressions", "datatype": dbt.type_int()}, 
+    {"name": "impressions", "datatype": dbt.type_int()},
     {"name": "conversion_value_in_local_currency", "datatype": dbt.type_numeric()}
 ] %}
 
-{% set unique_passthrough = var('linkedin_ads__campaign_passthrough_metrics') %}
+{{ fivetran_utils.add_pass_through_columns(columns, var('linkedin_ads__conversion_fields')) }}
 
-{%- for conversion in var('linkedin_ads__conversion_fields') %}
-    {% set check = [] -%}
-
-    {% for field in var('linkedin_ads__campaign_passthrough_metrics') %}
-        {%- set field_name = field.alias|default(field.name)|lower %}
-        {% if conversion|lower == field_name %}
-            {%- do check.append(conversion) %}
-        {% endif %}
-    {% endfor %}
-
-    {% if conversion|lower not in check %}
-    {% do unique_passthrough.append({"name": conversion}) %}
-    {% endif %}
-    
-{% endfor -%}
-
-{{ fivetran_utils.add_pass_through_columns(columns, unique_passthrough) }}
+{# Doing it this way in case users were bringing in conversion metrics via passthrough columns prior to us adding them by default #}
+{{ linkedin_ads_add_pass_through_columns(base_columns=columns, pass_through_fields=var('linkedin_ads__campaign_passthrough_metrics'), except_fields=(var('linkedin_ads__conversion_fields') + ['conversion_value_in_local_currency'])) }}
 
 {{ return(columns) }}
 

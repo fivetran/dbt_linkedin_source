@@ -38,7 +38,7 @@ with base as (
 
         cast(coalesce(conversion_value_in_local_currency, 0) as {{ dbt.type_float() }}) as conversion_value_in_local_currency
 
-        {% for conversion in var('linkedin_ads__conversion_fields') %}
+        {% for conversion in var('linkedin_ads__conversion_fields', []) %}
             , coalesce({{ conversion }}, 0) as {{ conversion }}
         {% endfor %}
 
