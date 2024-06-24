@@ -44,17 +44,7 @@ fields as (
             , coalesce({{ conversion }}, 0) as {{ conversion }}
         {% endfor %}
 
-        {% if var('linkedin_ads__campaign_passthrough_metrics') %}
-            {% for field in var('linkedin_ads__campaign_passthrough_metrics') %}
-                {% if (field.alias if field.alias else field.name) not in var('linkedin_ads__conversion_fields') %}
-                    {% if field.transform_sql %}
-                        , coalesce(cast({{ field.transform_sql }} as {{ dbt.type_float() }}), 0) as {{ field.alias if field.alias else field.name }}
-                    {% else %}
-                        , coalesce(cast({{ field.alias if field.alias else field.name }} as {{ dbt.type_float() }}), 0) as {{ field.alias if field.alias else field.name }}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+        {{ linkedin_ads_fill_pass_through_columns(pass_through_fields=var('linkedin_ads__campaign_passthrough_metrics'), except=(var('linkedin_ads__conversion_fields') + ['conversion_value_in_local_currency'])) }}
 
     from macro
 )
