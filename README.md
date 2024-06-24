@@ -40,14 +40,14 @@ dispatch:
     search_order: ['spark_utils', 'dbt_utils']
 ```
 
-## Step 2: Install the package (skip if also using the `linkedin` transformation package)
+## Step 2: Install the package (skip if also using the `linkedin` transformation package, or `ad_reporting` combination package)
 If you  are **not** using the [Linkedin transformation package](https://github.com/fivetran/dbt_linkedin), include the following package version in your `packages.yml` file. If you are installing the transform package, the source package is automatically installed as a dependency.
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 ```yml
 # packages.yml
 packages:
   - package: fivetran/linkedin_source
-    version: [">=0.8.0", "<0.9.0"]
+    version: [">=0.9.0", "<0.10.0"]
 ```
 
 ## Step 3: Define database and schema variables
@@ -83,23 +83,37 @@ vars:
 ```
 
 ### Passing Through Additional Metrics
-By default, this package will select `clicks`, `impressions`, and `cost` from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
-
->**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (taps, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
+By default, this package will select `clicks`, `impressions`, `cost` and `conversion_value_in_local_currency` from the source reporting tables `ad_analytics_by_campaign` and `ad_analytics_by_creative` to store into the corresponding staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) and transformed (`transform_sql`) if desired, but not required. Only the `name` of each metric field is required. Use the below format for declaring the respective pass-through variables:
 
 ```yml
 # dbt_project.yml
 vars:
     linkedin_ads__campaign_passthrough_metrics: # pulls from ad_analytics_by_campaign
         - name: "new_custom_field"
-          alias: "custom_field"
+          alias: "custom_field_alias"
+          transform_sql: "coalesce(custom_field_alias, 0)" # reference the `alias` here if you are using one
         - name: "unique_int_field"
           alias: "field_id"
+        - name: "another_one"
+          transform_sql: "coalesce(another_one, 0)" # reference the `name` here if you're not using an alias
         - name: "that_field"
     linkedin_ads__creative_passthrough_metrics: # pulls from ad_analytics_by_creative
         - name: "new_custom_field"
           alias: "custom_field"
         - name: "unique_int_field"
+```
+
+>**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
+
+### Adding in Conversion Fields Variable
+We introduced support for conversion fields in our `ad_analytics_by_campaign` and `ad_analytics_by_creative` data models in the [v0.9.0 release](https://github.com/fivetran/dbt_linkedin_source/releases/tag/v0.9.0) of the package, but customers might have been bringing in these conversion fields earlier using the passthrough fields variables. To avoid duplicate column errors, we have introduced the `linkedin_ads__conversion_fields` variable. 
+
+By default, these data models are set to bring in `external_website_conversions` and `one_click_leads`, the most used conversion fields. If you would like to modify which conversion fields you are bringing in, you can set them in the `dbt_project.yml`.
+
+```yml
+# dbt_project.yml
+vars:
+    linkedin_ads__conversion_fields: ['external_website_conversions',  'one_click_leads', 'external_website_post_click_conversions', 'landing_page_clicks']
 ```
 
 ### Change the build schema
@@ -113,7 +127,8 @@ models:
 ```
 
 ### Change the source table references
-If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
+If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable. This is not available when running the package on multiple unioned connectors.
+
 > IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_linkedin_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
     
 ```yml
@@ -152,4 +167,3 @@ A small team of analytics engineers at Fivetran develops these dbt packages. How
 # 🏪 Are there any resources available?
 - If you have questions or want to reach out for help, please refer to the [GitHub Issue](https://github.com/fivetran/dbt_linkedin_source/issues/new/choose) section to find the right avenue of support for you.
 - If you would like to provide feedback to the dbt package team at Fivetran or would like to request a new dbt package, fill out our [Feedback Form](https://www.surveymonkey.com/r/DQ7K7WW).
-- Have questions or want to be part of the community discourse? Create a post in the [Fivetran community](https://community.fivetran.com/t5/user-group-for-dbt/gh-p/dbt-user-group) and our team along with the community can join in on the discussion!

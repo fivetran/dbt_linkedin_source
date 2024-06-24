@@ -1,5 +1,5 @@
 name: 'linkedin_source_integration_tests'
-version: '0.8.2'
+version: '0.9.0'
 profile: 'integration_tests'
 config-version: 2
 
@@ -13,6 +13,8 @@ vars:
     linkedin_ads_ad_analytics_by_campaign_identifier: "linkedin_ad_analytics_by_campaign_data"
 
     linkedin_ads_schema: linkedin_source_integration_tests_3
+
+    linkedin_ads__conversion_fields: ['external_website_conversions', 'one_click_leads']
 
 seeds:
   linkedin_source_integration_tests:
