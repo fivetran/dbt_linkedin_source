@@ -29,10 +29,14 @@ with base as (
         id as creative_id,
         campaign_id,
         coalesce(status, intended_status) as status,
-        click_uri,
+        coalesce(text_ad_landing_page, spotlight_landing_page, click_uri) as click_uri,
         cast(coalesce(last_modified_time, last_modified_at) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_time, created_at) as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by source_relation, id order by coalesce(last_modified_time, last_modified_at) desc) = 1 as is_latest_version
+        row_number() over (partition by source_relation, id order by coalesce(last_modified_time, last_modified_at) desc) = 1 as is_latest_version,
+        case when text_ad_landing_page then 'text_ad'
+            when spotlight_landing_page then 'spotlight'
+            else cast(null as {{ dbt.type_string() }}}
+            end as click_uri_type
 
     from macro
 
