@@ -35,7 +35,7 @@ with base as (
         row_number() over (partition by source_relation, id order by coalesce(last_modified_time, last_modified_at) desc) = 1 as is_latest_version,
         case when text_ad_landing_page then 'text_ad'
             when spotlight_landing_page then 'spotlight'
-            else cast(null as {{ dbt.type_string() }}}
+            else cast(null as {{ dbt.type_string() }})
             end as click_uri_type
 
     from macro
