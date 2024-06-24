@@ -33,8 +33,8 @@ with base as (
         cast(coalesce(last_modified_time, last_modified_at) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_time, created_at) as {{ dbt.type_timestamp() }}) as created_at,
         row_number() over (partition by source_relation, id order by coalesce(last_modified_time, last_modified_at) desc) = 1 as is_latest_version,
-        case when text_ad_landing_page then 'text_ad'
-            when spotlight_landing_page then 'spotlight'
+        case when text_ad_landing_page is not null then 'text_ad'
+            when spotlight_landing_page is not null then 'spotlight'
             else cast(null as {{ dbt.type_string() }})
             end as click_uri_type
 
