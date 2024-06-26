@@ -118,6 +118,8 @@ vars:
     linkedin_ads__conversion_fields: ['external_website_conversions',  'one_click_leads', 'external_website_post_click_conversions', 'landing_page_clicks']
 ```
 
+Make sure to follow best practices in configuring fields in the conversion field variables! [See the DECISIONLOG for more details](https://github.com/fivetran/dbt_linkedin_source/blob/main/DECISIONLOG.md#best-practices-with-configuring-linkedin-ads-conversion-fields-variable). 
+
 ### Change the build schema
 By default, this package builds the Linkedin Ads staging models within a schema titled (`<target_schema>` + `_linkedin_ads_source`) in your destination. If this is not where you would like your Linkedin staging data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
