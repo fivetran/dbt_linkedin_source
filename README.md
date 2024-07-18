@@ -105,12 +105,12 @@ vars:
         - name: "unique_int_field"
 ```
 
->**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package. (**Important**: You do not need to add conversions in this way. See the following section for how to implement.)
+>**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package. (**Important**: You do not need to add conversions in this way. See the following section for an alternative implementation.)
 
 ### Adding in Conversion Fields Variable
 Separate from the above passthrough metrics, the package will also include conversion metrics based on the `linkedin_ads__conversion_fields` variable, in addition to the `conversion_value_in_local_currency` field.
 
-By default, the data models consider `external_website_conversions` and `one_click_leads` to be conversions. These should cover most use cases, but, say, if you would like to consider landing page clicks and external post click conversions to _also_ be conversions, you would apply the following configuration:
+By default, the data models consider `external_website_conversions` and `one_click_leads` to be conversions. These should cover most use cases, but, say, if you would like to consider landing page clicks and external post click conversions to *also* be conversions, you would apply the following configuration:
 
 ```yml
 # dbt_project.yml
