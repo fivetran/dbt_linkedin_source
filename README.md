@@ -41,7 +41,7 @@ dispatch:
 ```
 
 ## Step 2: Install the package (skip if also using the `linkedin` transformation package, or `ad_reporting` combination package)
-If you  are **not** using the [Linkedin transformation package](https://github.com/fivetran/dbt_linkedin), include the following package version in your `packages.yml` file. If you are installing the transform package, the source package is automatically installed as a dependency.
+If you  are **not** using the [Linkedin transformation package](https://github.com/fivetran/dbt_linkedin) and/or [Ad Reporting transformation package](https://github.com/fivetran/dbt_ad_reporting), include the following package version in your `packages.yml` file. If you are installing the transform package, the source package is automatically installed as a dependency.
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 ```yml
 # packages.yml
@@ -73,7 +73,7 @@ Please be aware that the native `source.yml` connection set up in the package wi
 
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
-### Switching to Local Currency
+### Switching to Local Currency for Costs
 Additionally, the package allows you to select whether you want to add in costs in USD or the local currency of the ad. By default, the package uses USD. If you would like to have costs in the local currency, add the following variable to your `dbt_project.yml` file:
 
 ```yml
@@ -82,10 +82,10 @@ vars:
     linkedin_ads__use_local_currency: True # false by default -- uses USD
 ```
 
-Note: It should be noted that conversions are only reported in the local currency and are brought into our models as `conversion_value_in_local_currency`.
+**Note**: Unlike cost, conversion values are only available in the local currency. The package will only use the `conversion_value_in_local_currency` field for conversion values, while it may draw from the `cost_in_local_currency` and `cost_in_usd` source fields for cost.
 
 ### Passing Through Additional Metrics
-By default, this package will select `clicks`, `impressions`, `cost` and `conversion_value_in_local_currency` from the source reporting tables `ad_analytics_by_campaign` and `ad_analytics_by_creative` to store into the corresponding staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) and transformed (`transform_sql`) if desired, but not required. Only the `name` of each metric field is required. Use the below format for declaring the respective pass-through variables:
+By default, this package will select `clicks`, `impressions`, `cost` and `conversion_value_in_local_currency` (as well as fields set via `linkedin_ads__conversion_fields` in the next section) from the source reporting tables `ad_analytics_by_campaign` and `ad_analytics_by_creative` to store into the corresponding staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) and transformed (`transform_sql`) if desired, but not required. Only the `name` of each metric field is required. Use the below format for declaring the respective pass-through variables:
 
 ```yml
 # dbt_project.yml
@@ -105,12 +105,12 @@ vars:
         - name: "unique_int_field"
 ```
 
->**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
+>**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package. (**Important**: You do not need to add conversions in this way. See the following section for how to implement.)
 
 ### Adding in Conversion Fields Variable
-We introduced support for conversion fields in our `ad_analytics_by_campaign` and `ad_analytics_by_creative` data models in the [v0.9.0 release](https://github.com/fivetran/dbt_linkedin_source/releases/tag/v0.9.0) of the package, but customers might have been bringing in these conversion fields earlier using the passthrough fields variables. To avoid duplicate column errors, we have introduced the `linkedin_ads__conversion_fields` variable. 
+Separate from the above passthrough metrics, the package will also include conversion metrics based on the `linkedin_ads__conversion_fields` variable, in addition to the `conversion_value_in_local_currency` field.
 
-By default, these data models are set to bring in `external_website_conversions` and `one_click_leads`, the most used conversion fields. If you would like to modify which conversion fields you are bringing in, you can set them in the `dbt_project.yml`.
+By default, the data models consider `external_website_conversions` and `one_click_leads` to be conversions. These should cover most use cases, but, say, if you would like to consider landing page clicks and external post click conversions to _also_ be conversions, you would apply the following configuration:
 
 ```yml
 # dbt_project.yml
@@ -119,6 +119,8 @@ vars:
 ```
 
 Make sure to follow best practices in configuring fields in the conversion field variables! [See the DECISIONLOG for more details](https://github.com/fivetran/dbt_linkedin_source/blob/main/DECISIONLOG.md#best-practices-with-configuring-linkedin-ads-conversion-fields-variable). 
+
+> We introduced support for conversion fields in our `ad_analytics_by_campaign` and `ad_analytics_by_creative` data models in the [v0.9.0 release](https://github.com/fivetran/dbt_linkedin_source/releases/tag/v0.9.0) of the package, but customers might have been bringing in these conversion fields earlier using the passthrough fields variables. The data models will avoid "duplicate column" errors automatically if this is the case. 
 
 ### Change the build schema
 By default, this package builds the Linkedin Ads staging models within a schema titled (`<target_schema>` + `_linkedin_ads_source`) in your destination. If this is not where you would like your Linkedin staging data to be written to, add the following configuration to your root `dbt_project.yml` file:

@@ -3,7 +3,7 @@ The `linkedin_ads__conversion_fields` variable is designed for end users to prop
 
 However, if you decide to configure your own conversion field variable fields, we highly recommend that you bring in conversions at the proper level of segmentation, so there aren't conversions that belong to multiple fields you bring in.
 
-### Bad Practice
+### Bad Practice Example
 
 ```yml
 # dbt_project.yml
@@ -13,7 +13,7 @@ vars:
 
 `external_website_conversions` is comprised of both `external_website_pre_click_conversions` and `external_website_post_click_conversions`. 
 
-### Good Practice
+### Good Practice Example
 
 ```yml
 # dbt_project.yml

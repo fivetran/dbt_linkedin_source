@@ -2,31 +2,6 @@
 
 {% macro linkedin_ads_add_pass_through_columns(base_columns, pass_through_fields, except_fields=[]) %}
 
-{# {% set unique_passthrough = pass_through_fields %}
-
-{%- for except in except_fields %}
-    {% set check = [] -%}
-
-    {% for field in pass_through_fields %}
-        {%- set field_name = field.alias|default(field.name)|lower %}
-        {% if except|lower == field_name %}
-            {%- do check.append(except) %}
-        {% endif %}
-    {% endfor %}
-
-    {% if except|lower not in check %}
-    {% do unique_passthrough.append({"name": except}) %}
-    {% endif %}
-    
-{% endfor -%}
-
-{{ fivetran_utils.add_pass_through_columns(columns, unique_passthrough) }}
-
-{% endmacro %}
-
-
-{% macro add_pass_through_columns(base_columns, pass_through_fields, except_fields=[]) %} #}
-
 {% if pass_through_fields %}
     {% for column in pass_through_fields %}
 
