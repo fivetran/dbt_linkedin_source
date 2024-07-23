@@ -20,7 +20,6 @@ We have added more robust support for conversions in our data models by doing th
 ## Contributors
 - [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation)
 
-## 🚨 Breaking Changes 🚨
 # dbt_linkedin_source v0.8.2
 [PR #66](https://github.com/fivetran/dbt_linkedin_source/pull/66) includes the following updates:
 ## Bug Fixes
