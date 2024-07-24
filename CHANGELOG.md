@@ -12,7 +12,7 @@ We have added more robust support for conversions in our data models by doing th
 
 ## Documentation Update 
 - Documents the ability to transform metrics provided to the `linkedin_ads__campaign_passthrough_metrics` and `linkedin_ads__creative_passthrough_metrics` variables [in the README](https://github.com/fivetran/dbt_linkedin_source/blob/main/README.md#adding-in-conversion-fields-variable).
-- Added new metrics to `src` and `stg` yml files
+- Added new metrics to `src` and `stg` yml files.
 
 ## Under the Hood
 - Updated `linkedin_ad_analytics_by_creative_data` seed file with relevant conversion fields for more robust testing. 
