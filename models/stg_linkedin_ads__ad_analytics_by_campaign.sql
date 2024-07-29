@@ -38,10 +38,10 @@ fields as (
         cost_in_usd as cost,
         {% endif %}
 
-        cast(coalesce(conversion_value_in_local_currency, 0) as {{ dbt.type_float() }}) as conversion_value_in_local_currency
+        coalesce(cast(conversion_value_in_local_currency as {{ dbt.type_float() }}), 0) as conversion_value_in_local_currency
 
         {% for conversion in var('linkedin_ads__conversion_fields', []) %}
-            , coalesce({{ conversion }}, 0) as {{ conversion }}
+            , coalesce(cast({{ conversion }} as {{ dbt.type_bigint() }}), 0) as {{ conversion }}
         {% endfor %}
 
         {{ linkedin_ads_fill_pass_through_columns(pass_through_fields=var('linkedin_ads__campaign_passthrough_metrics'), except=(var('linkedin_ads__conversion_fields') + ['conversion_value_in_local_currency'])) }}
