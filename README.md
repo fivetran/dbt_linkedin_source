@@ -110,7 +110,7 @@ vars:
 ### Adding in Conversion Fields Variable
 Separate from the above passthrough metrics, the package will also include conversion metrics based on the `linkedin_ads__conversion_fields` variable, in addition to the `conversion_value_in_local_currency` field.
 
-By default, the data models consider `external_website_conversions` and `one_click_leads` to be conversions. These should cover most use cases, but, say, if you would like to consider landing page clicks and external post click conversions to *also* be conversions, you would apply the following configuration:
+By default, the data models consider `external_website_conversions` and `one_click_leads` to be conversions. These should cover most use cases, but, say, if you would like to consider landing page clicks and external post click conversions to *also* be conversions, you would apply the following configuration with the **original** source names of the conversion fields (not aliases you provided in the section above):
 
 ```yml
 # dbt_project.yml
