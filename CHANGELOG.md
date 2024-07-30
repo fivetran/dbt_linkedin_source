@@ -1,3 +1,25 @@
+# dbt_linkedin_source v0.9.0
+[PR #67](https://github.com/fivetran/dbt_linkedin_source/pull/67) includes the following updates:
+
+## 🚨 Breaking Changes 🚨
+## Feature Updates: Conversion Support!
+We have added more robust support for conversions in our data models by doing the following: 
+- Created a `linkedin_ads__conversion_fields` variable to pass through additional conversion metrics in the `stg_linkedin_ads__ad_analytics_by_campaign` and `stg_linkedin_ads__ad_analytics_by_creative` models. 
+  - Set variable defaults in the `dbt_project.yml` to bring in the most used conversion fields `external_website_conversions` and `one_click_leads`. 
+- Ensured backwards compatibility with existing passthrough column variables in these models by creating macro checks for whether these fields already are brought in by the existing passthrough variables. This ensures there are no duplicate column errors if both the new conversion variable and the old passthrough variable are leveraged in either `stg_linkedin_ads__ad_analytics_by_*` data model. 
+- Brought in the `conversion_value_in_local_currency` field to the above mentioned `stg_linkedin_ads__ad_analytics_by_*` models.
+> The above new field additions are 🚨 **breaking changes** 🚨 for users who were not already bringing in conversion fields via passthrough columns.
+
+## Documentation Update 
+- Documents the ability to transform metrics provided to the `linkedin_ads__campaign_passthrough_metrics` and `linkedin_ads__creative_passthrough_metrics` variables [in the README](https://github.com/fivetran/dbt_linkedin_source/blob/main/README.md#adding-in-conversion-fields-variable).
+- Added new metrics to `src` and `stg` yml files.
+
+## Under the Hood
+- Updated `linkedin_ad_analytics_by_creative_data` seed file with relevant conversion fields for more robust testing. 
+
+## Contributors
+- [Seer Interactive](https://www.seerinteractive.com/?utm_campaign=Fivetran%20%7C%20Models&utm_source=Fivetran&utm_medium=Fivetran%20Documentation)
+
 # dbt_linkedin_source v0.8.2
 [PR #66](https://github.com/fivetran/dbt_linkedin_source/pull/66) includes the following updates:
 ## Bug Fixes

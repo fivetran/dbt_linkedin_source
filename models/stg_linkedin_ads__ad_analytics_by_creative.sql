@@ -31,12 +31,18 @@ with base as (
         clicks, 
         impressions,
         {% if var('linkedin_ads__use_local_currency', false) %}
-        cost_in_local_currency as cost
+        cost_in_local_currency as cost,
         {% else %}
-        cost_in_usd as cost
+        cost_in_usd as cost,
         {% endif %}
 
-        {{ fivetran_utils.fill_pass_through_columns('linkedin_ads__creative_passthrough_metrics') }}
+        coalesce(cast(conversion_value_in_local_currency as {{ dbt.type_float() }}), 0) as conversion_value_in_local_currency
+
+        {% for conversion in var('linkedin_ads__conversion_fields', []) %}
+            , coalesce(cast({{ conversion }} as {{ dbt.type_bigint() }}), 0) as {{ conversion }}
+        {% endfor %}
+
+        {{ linkedin_ads_fill_pass_through_columns(pass_through_fields=var('linkedin_ads__creative_passthrough_metrics'), except=(var('linkedin_ads__conversion_fields') + ['conversion_value_in_local_currency'])) }}
 
     from macro
 
