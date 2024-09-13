@@ -32,11 +32,15 @@ with base as (
         coalesce(text_ad_landing_page, spotlight_landing_page, click_uri) as click_uri,
         cast(coalesce(last_modified_time, last_modified_at) as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(coalesce(created_time, created_at) as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by source_relation, id order by coalesce(last_modified_time, last_modified_at) desc) = 1 as is_latest_version,
         case when text_ad_landing_page is not null then 'text_ad'
             when spotlight_landing_page is not null then 'spotlight'
             else cast(null as {{ dbt.type_string() }})
-            end as click_uri_type
+        end as click_uri_type,
+        {{ linkedin_source.result_if_table_exists(
+            table_ref=ref('stg_linkedin_ads__creative_history_tmp'), 
+            result_statement='row_number() over (partition by id' ~ (', source_relation' if var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) ~ ' order by coalesce(last_modified_time, last_modified_at) desc)',
+            if_empty=1
+        )}} = 1 as is_latest_version
 
     from macro
 

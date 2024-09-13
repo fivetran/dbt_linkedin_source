@@ -93,9 +93,10 @@ models:
           CANCELED - Creative is permanently canceled.
 
       - name: click_uri
-        description: |
-          Required when creative type is TEXT_AD. Maximum character limit of 500 after URL encoding all special characters. 
-          Limit does not include the "https://" prefix.
+        description: The URL where the member should be redirected to, on clicking the text ad or spotlight ad.
+
+      - name: click_uri_type
+        description: Will either be `text_ad`, `spotlight`, or `null` to indicate the origin of the click_uri.
 
       - name: base_url
         description: The base URL of the ad, extracted from the `click_uri`.
