@@ -10,7 +10,7 @@
             select 1 from {{ table_name }} limit 1
         {% endset %}
         {% set results = run_query(row_count_query) %}
-        {% if not results %}
+        {% if results.rows | length == 0 %}
             {{ return("empty") }}
         {% endif %}
     {% endif -%}
