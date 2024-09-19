@@ -75,7 +75,7 @@ sources:
             description: The URL where the member should be redirected to, on clicking the text ad.
 
           - name: spotlight_landing_page
-            description: The URL where the member should be re-directed to, on clicking the spotlight ad.
+            description: The URL where the member should be redirected to, on clicking the spotlight ad.
 
           - name: intended_status
             description: |
