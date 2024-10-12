@@ -10,6 +10,8 @@
     {"name": "last_modified_at", "datatype": dbt.type_timestamp()},
     {"name": "intended_status", "datatype": dbt.type_string()},
     {"name": "status", "datatype": dbt.type_string()},
+    {"name": "text_ad_landing_page", "datatype": dbt.type_string()},
+    {"name": "spotlight_landing_page", "datatype": dbt.type_string()}
 ] %}
 
 {{ return(columns) }}
