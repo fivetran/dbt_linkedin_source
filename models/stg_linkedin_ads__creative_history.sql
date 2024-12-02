@@ -36,11 +36,7 @@ with base as (
             when spotlight_landing_page is not null then 'spotlight'
             else cast(null as {{ dbt.type_string() }})
         end as click_uri_type,
-        {{ linkedin_source.result_if_table_exists(
-            table_ref=ref('stg_linkedin_ads__creative_history_tmp'), 
-            result_statement='row_number() over (partition by id' ~ (', source_relation' if var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) ~ ' order by coalesce(last_modified_time, last_modified_at) desc)',
-            if_empty=1
-        )}} = 1 as is_latest_version
+        row_number() over (partition by id {{ ' ~ (', source_relation' if var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) ~ ' }} order by last_modified_time desc) = 1 as is_latest_version
 
     from macro
 

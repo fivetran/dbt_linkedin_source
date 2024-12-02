@@ -34,11 +34,7 @@ with base as (
         type,
         cast(last_modified_time as {{ dbt.type_timestamp() }}) as last_modified_at,
         cast(created_time as {{ dbt.type_timestamp() }}) as created_at,
-        {{ linkedin_source.result_if_table_exists(
-            table_ref=ref('stg_linkedin_ads__account_history_tmp'), 
-            result_statement='row_number() over (partition by id' ~ (', source_relation' if var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) ~ ' order by last_modified_time desc)',
-            if_empty=1
-        )}} = 1 as is_latest_version
+        row_number() over (partition by id {{ ' ~ (', source_relation' if var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) ~ ' }} order by last_modified_time desc) = 1 as is_latest_version
 
     from macro
 
