@@ -36,7 +36,7 @@ with base as (
             when spotlight_landing_page is not null then 'spotlight'
             else cast(null as {{ dbt.type_string() }})
         end as click_uri_type,
-        row_number() over (partition by id {{ ' ~ (', source_relation' if var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) ~ ' }} order by last_modified_time desc) = 1 as is_latest_version
+        row_number() over (partition by id {{ ', source_relation' if (var('linkedin_ads_union_schemas', []) or var('linkedin_ads_union_databases', []) | length > 1) }} order by last_modified_time desc) = 1 as is_latest_version
 
     from macro
 
