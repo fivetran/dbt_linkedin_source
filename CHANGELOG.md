@@ -13,6 +13,7 @@
     - `stg_linkedin_ads__campaign_group_history`
     - `stg_linkedin_ads__campaign_history`
     - `stg_linkedin_ads__creative_history`
+- In addition to the above, the `is_latest_version` window function within the `stg_linkedin_ads__creative_history` model has been moved to the final cte to avoid possible constant expression errors within Redshift destinations.
 
 ## Under the Hood
 - Updates to the `linkedin_creative_history_data` seed file to include the following new fields to ensure accurate data validation tests:
