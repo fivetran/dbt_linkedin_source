@@ -20,6 +20,10 @@
   - `text_ad_landing_page`
   - `spotlight_landing_page`
 
+## Documentation Updates
+- Added `click_uri_type` field documentation.
+- The `click_uri` field documentation has been updated to reflect the updated state of the field.
+
 # dbt_linkedin_source v0.9.0
 [PR #67](https://github.com/fivetran/dbt_linkedin_source/pull/67) includes the following updates:
 
