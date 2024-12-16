@@ -1,3 +1,29 @@
+# dbt_linkedin_source v0.10.0
+[PR #69](https://github.com/fivetran/dbt_linkedin_source/pull/69) includes the following updates:
+
+## Breaking Changes
+- The `click_uri_type` field has been added to the `stg_linkedin_ads__creative_history` model. This field allows users to differentiate which click uri type (`text_ad` or `spotlight`) is being used to populate the results of the `click_uri` field. 
+  - Please be aware this field only supports `text_ad` or `spotlight` click uri types. If you are interested in this package supporting more click uri ad types, please let us know in this [Feature Request](https://github.com/fivetran/dbt_linkedin_source/issues/70).
+
+## Bug Fixes
+- The `click_uri` field has been adjusted to populate the results following a coalesce on the `text_ad_landing_page`, `spotlight_landing_page`, or `click_uri` fields. 
+  - This change is in response to a [LinkedIn Ads API](https://learn.microsoft.com/en-us/linkedin/marketing/community-management/contentapi-migration-guide?view=li-lms-2024-05#adcreativesv2-api-creatives-api) and [Fivetran LinkedIn Ads connector update](https://fivetran.com/docs/connectors/applications/linkedin-ads/changelog#january2024) which moved `click_uri` data to either the `text_ad_landing_page` or `spotlight_landing_page` fields depending on the creative type.
+- Updated the `is_latest_version` window function in the following models to exclude the `source_relation` field from the partition statement when `linkedin_ads_union_schemas` or `linkedin_ads_union_databases` variables are empty in the following models:
+    - `stg_linkedin_ads__account_history`
+    - `stg_linkedin_ads__campaign_group_history`
+    - `stg_linkedin_ads__campaign_history`
+    - `stg_linkedin_ads__creative_history`
+- In addition to the above, the `is_latest_version` window function within the `stg_linkedin_ads__creative_history` model has been moved to the final cte to avoid possible constant expression errors within Redshift destinations.
+
+## Under the Hood
+- Updates to the `linkedin_creative_history_data` seed file to include the following new fields to ensure accurate data validation tests:
+  - `text_ad_landing_page`
+  - `spotlight_landing_page`
+
+## Documentation Updates
+- Added `click_uri_type` field documentation.
+- The `click_uri` field documentation has been updated to reflect the updated state of the field.
+
 # dbt_linkedin_source v0.9.0
 [PR #67](https://github.com/fivetran/dbt_linkedin_source/pull/67) includes the following updates:
 

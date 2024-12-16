@@ -69,9 +69,13 @@ sources:
             description: The ID of the campaign the creative belongs to.
 
           - name: click_uri
-            description: |
-                Required when creative type is TEXT_AD. Maximum character limit of 500 after URL encoding all special characters. 
-                Limit does not include the "https://" prefix.
+            description: Deprecated url field. Please refer to the text_ad_landing_page and spotlight_landing_page fields for relevant landing page information.  
+          
+          - name: text_ad_landing_page
+            description: The URL where the member should be redirected to, on clicking the text ad.
+
+          - name: spotlight_landing_page
+            description: The URL where the member should be redirected to, on clicking the spotlight ad.
 
           - name: intended_status
             description: |
