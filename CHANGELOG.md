@@ -1,3 +1,8 @@
+# dbt_linkedin_source version.version
+
+## Documentation
+- Corrected references to connectors and connections in the README. ([#73](https://github.com/fivetran/dbt_linkedin_source/pull/73))
+
 # dbt_linkedin_source v0.10.0
 [PR #69](https://github.com/fivetran/dbt_linkedin_source/pull/69) includes the following updates:
 
