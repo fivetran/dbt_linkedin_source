@@ -1,5 +1,4 @@
-{{ config(enabled=var('ad_reporting__linkedin_ads_enabled', True) and var('linkedin_ads__using_monthly_ad_analytics_by_member_region', True)) }}
-
+{{ config(enabled=fivetran_utils.enabled_vars(['ad_reporting__linkedin_ads_enabled','linkedin_ads__using_monthly_ad_analytics_by_member_region'])) }}
 
 with base as (
 
@@ -33,6 +32,7 @@ fields as (
         campaign_id,
         member_region,
         impressions,
+        clicks,
         {% if var('linkedin_ads__use_local_currency', false) %}
         cost_in_local_currency as cost,
         {% else %}

@@ -1,4 +1,4 @@
-{{ config(enabled=var('ad_reporting__linkedin_ads_enabled', True) and var('linkedin_ads__using_monthly_ad_analytics_by_member_region', True)) }}
+{{ config(enabled=fivetran_utils.enabled_vars(['ad_reporting__linkedin_ads_enabled','linkedin_ads__using_monthly_ad_analytics_by_member_region'])) }}
 
 {{
     fivetran_utils.union_data(

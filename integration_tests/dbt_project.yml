@@ -19,6 +19,8 @@ vars:
     linkedin_ads__conversion_fields: ['external_website_conversions', 'one_click_leads']
 
 seeds:
+  +docs:
+    show: false
   linkedin_source_integration_tests:
     linkedin_creative_history_data:
       +column_types:
