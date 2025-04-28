@@ -4,7 +4,7 @@
 
 ## Schema Changes
 **6 total changes • 0 possible breaking changes
-| Table/Column                                      | Change Type | Old Name | New Name                                  | Notes                                                             |
+| Data Model                                      | Change Type | Old Name | New Name                                  | Notes                                                             |
 |---------------------------------------------------|-------------|----------|-------------------------------------------|-------------------------------------------------------------------|
 | stg_tiktok_ads__geo_tmp       | New temp model   |          |  | Temp model added for `geo`.               |
 | stg_tiktok_ads__geo          | New staging model   |          |    | Staging model added for `geo`.         |
