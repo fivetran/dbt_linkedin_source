@@ -30,7 +30,7 @@ fields as (
         source_relation,
         {{ linkedin_source.date_from_month_string('date_month') }} as date_month, --Renamed in macros/get_monthly_ad_analytics_by_member_region_columns to avoid reserved word error.
         campaign_id,
-        member_region,
+        member_region as member_region_geo_id,
         impressions,
         clicks,
         {% if var('linkedin_ads__use_local_currency', false) %}
@@ -45,7 +45,7 @@ fields as (
             , coalesce(cast({{ conversion }} as {{ dbt.type_bigint() }}), 0) as {{ conversion }}
         {% endfor %}
 
-        {{ linkedin_ads_fill_pass_through_columns(pass_through_fields=var('linkedin_ads__monthly_ad_analytics_by_member_region_passthrough_metrics'), except=(var('linkedin_ads__conversion_fields') + ['conversion_value_in_local_currency'])) }}
+        {{ linkedin_ads_fill_pass_through_columns(pass_through_fields=var('linkedin_ads__monthly_ad_analytics_by_member_region_passthrough_metrics')) }}
 
     from macro
 )

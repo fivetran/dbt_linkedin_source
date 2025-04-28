@@ -74,7 +74,7 @@ vars:
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
 #### Disable Country and Region Reports
-This package leverages the `geo`, `monthly_ad_analytics_by_member_country`, and `monthly_ad_analytics_by_member_region` tables to help report on campaign performance by country and region. However, if you are not actively syncing this reports from your LinkedIn Ads connection, you may disable transformations for the `monthly_ad_analytics_by_member_country` and `monthly_ad_analytics_by_member_region` by adding the following variable configuration to your root `dbt_project.yml` file:
+This package leverages the `geo`, `monthly_ad_analytics_by_member_country`, and `monthly_ad_analytics_by_member_region` tables to help report on campaign performance by country and region. However, if you are not actively syncing these reports from your LinkedIn Ads connection, you may disable relevant transformations by adding the following variable configuration to your root `dbt_project.yml` file:
 ```yml
 vars:
     linkedin_ads__using_geo: False # True by default
