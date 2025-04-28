@@ -345,10 +345,6 @@ sources:
           - name: cost_in_usd
             description: The cost of the ads in the USD.
           - name: external_website_conversions
-            description: Number of conversions that occurred on an external website as a result of the ad.
-          - name: one_click_leads
-            description: Number of one-click leads generated from the ad campaign.
-          - name: external_website_conversions
             description: The actions taken on your website that you've defined as valuable to your business after clicking on LinkedIn ads.
           - name: one_click_leads
             description: Leads submitted after clicking on LinkedIn ads.
@@ -374,11 +370,7 @@ sources:
           - name: cost_in_local_currency
             description: The cost of the ads in the local currency.
           - name: cost_in_usd
-            description: The cost of the ads in the USD.
-          - name: external_website_conversions
-            description: Number of conversions that occurred on an external website as a result of the ad.
-          - name: one_click_leads
-            description: Number of one-click leads generated from the ad campaign.
+            description: The cost of the ads in the USD. 
           - name: external_website_conversions
             description: The actions taken on your website that you've defined as valuable to your business after clicking on LinkedIn ads.
           - name: one_click_leads

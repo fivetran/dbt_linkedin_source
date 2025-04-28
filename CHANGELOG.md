@@ -3,20 +3,23 @@
 [PR #74](https://github.com/fivetran/dbt_linkedin_source/pull/74) includes the following updates:
 
 ## Schema Changes
-**6 total changes • 0 possible breaking changes
+**6 total changes • 0 possible breaking changes**
 | Data Model                                      | Change Type | Old Name | New Name                                  | Notes                                                             |
 |---------------------------------------------------|-------------|----------|-------------------------------------------|-------------------------------------------------------------------|
-| stg_tiktok_ads__geo_tmp       | New temp model   |          |  | Temp model added for `geo`.               |
-| stg_tiktok_ads__geo          | New staging model   |          |    | Staging model added for `geo`.         |
-| stg_linkedin_ads__monthly_ad_analytics_by_country_tmp          | New temp model   |          |    | Temp model added for `monthly_ad_analytics_by_member_country`.         |
-| stg_linkedin_ads__monthly_ad_analytics_by_country          | New staging model   |          |    | Staging model added for `monthly_ad_analytics_by_member_country`.         |
-| stg_linkedin_ads__monthly_ad_analytics_by_region_tmp          | New temp model   |          |    | Temp model added for `monthly_ad_analytics_by_member_region`. Name shortened for warehouse table name length compatibility.         |
-| stg_linkedin_ads__monthly_ad_analytics_by_region          | New staging model   |          |    | Staging model added for `monthly_ad_analytics_by_member_region`. Name shortened for warehouse table name length compatibility.           |
+| [stg_linkedin_ads__geo_tmp](https://fivetran.github.io/dbt_linkedin_source/#!/model/model.linkedin_source.stg_linkedin_ads__geo_tmp)       | New temp model   |          |  | Temp model added for `geo`.               |
+| [stg_linkedin_ads__geo](https://fivetran.github.io/dbt_linkedin_source/#!/model/model.linkedin_source.stg_linkedin_ads__geo)          | New staging model   |          |    | Staging model added for `geo`.         |
+| [stg_linkedin_ads__monthly_ad_analytics_by_country_tmp](https://fivetran.github.io/dbt_linkedin_source/#!/model/model.linkedin_source.stg_linkedin_ads__monthly_ad_analytics_by_country_tmp)          | New temp model   |          |    | Temp model added for `monthly_ad_analytics_by_member_country`.         |
+| [stg_linkedin_ads__monthly_ad_analytics_by_country](https://fivetran.github.io/dbt_linkedin_source/#!/model/model.linkedin_source.stg_linkedin_ads__monthly_ad_analytics_by_country)          | New staging model   |          |    | Staging model added for `monthly_ad_analytics_by_member_country`.         |
+| [stg_linkedin_ads__monthly_ad_analytics_by_region_tmp](https://fivetran.github.io/dbt_linkedin_source/#!/model/model.linkedin_source.stg_linkedin_ads__monthly_ad_analytics_by_region_tmp)          | New temp model   |          |    | Temp model added for `monthly_ad_analytics_by_member_region`. Name shortened for warehouse table name length compatibility.         |
+| [stg_linkedin_ads__monthly_ad_analytics_by_region](https://fivetran.github.io/dbt_linkedin_source/#!/model/model.linkedin_source.stg_linkedin_ads__monthly_ad_analytics_by_region)          | New staging model   |          |    | Staging model added for `monthly_ad_analytics_by_member_region`. Name shortened for warehouse table name length compatibility.           |
 
 ## Feature Updates
 - Added the `geo`, `monthly_ad_analytics_by_member_country` and `monthly_ad_analytics_by_member_region` source tables and downstream staging models. See above for schema change details and new models added.
   - For dbt Core users: If you do not sync these tables or would like disable these new models you can disable the models by setting the any of the `linkedin_ads__using_geo`, `linkedin_ads__using_monthly_ad_analytics_by_member_country`, or `linkedin_ads__using_monthly_ad_analytics_by_member_region` variables to `false` in your `dbt_project.yml` file (`true` by default). Refer to the [README](https://github.com/fivetran/dbt_linkedin_source?tab=readme-ov-file#disable-country-and-region-reports) for more details.
 - Included the `linkedin_ads__monthly_ad_analytics_by_member_country_passthrough_metrics` and `linkedin_ads__monthly_ad_analytics_by_member_region_passthrough_metrics` passthrough variables in the above mentioned new staging models. Refer to the [README](https://github.com/fivetran/dbt_linkedin_source/tree/main?tab=readme-ov-file#passing-through-additional-metrics) for more details.
+
+## Under the Hood
+- Introduced the `date_from_month_string` macro to help convert the `date_month` field within the `stg_linkedin_ads__monthly_ad_analytics_by_region` and `stg_linkedin_ads__monthly_ad_analytics_by_county` models to be an appropriate date field as opposed to a string.
 
 ## Documentation
 - Corrected references to connectors and connections in the README. ([#73](https://github.com/fivetran/dbt_linkedin_source/pull/73))
