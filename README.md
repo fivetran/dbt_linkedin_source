@@ -1,4 +1,6 @@
-<p align="center">
+# LinkedIn Ad Analytics Source dbt Package ([docs](https://fivetran.github.io/dbt_linkedin_source/))
+
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_linkedin_source/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -12,8 +14,6 @@
         href="https://fivetran.com/docs/transformations/dbt/quickstart">
         <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
-
-# LinkedIn Ad Analytics Source dbt Package ([docs](https://fivetran.github.io/dbt_linkedin_source/))
 
 ## What does this dbt package do?
 <!--section="linkedin_ads_source_model"-->
@@ -47,7 +47,7 @@ If you  are **not** using the [Linkedin transformation package](https://github.c
 # packages.yml
 packages:
   - package: fivetran/linkedin_source
-    version: [">=0.10.0", "<0.11.0"]
+    version: [">=0.11.0", "<0.12.0"]
 ```
 
 ### Step 3: Define database and schema variables
@@ -73,6 +73,15 @@ vars:
 
 To connect your multiple schema/database sources to the package models, follow the steps outlined in the [Union Data Defined Sources Configuration](https://github.com/fivetran/dbt_fivetran_utils/tree/releases/v0.4.latest#union_data-source) section of the Fivetran Utils documentation for the union_data macro. This will ensure a proper configuration and correct visualization of connections in the DAG.
 
+#### Disable Country and Region Reports
+This package leverages the `geo`, `monthly_ad_analytics_by_member_country`, and `monthly_ad_analytics_by_member_region` tables to help report on campaign performance by country and region. However, if you are not actively syncing these reports from your LinkedIn Ads connection, you may disable relevant transformations by adding the following variable configuration to your root `dbt_project.yml` file:
+```yml
+vars:
+    linkedin_ads__using_geo: False # True by default
+    linkedin_ads__using_monthly_ad_analytics_by_member_country: False # True by default
+    linkedin_ads__using_monthly_ad_analytics_by_member_region: False # True by default
+```
+
 #### Switching to Local Currency for Costs
 Additionally, the package allows you to select whether you want to add in costs in USD or the local currency of the ad. By default, the package uses USD. If you would like to have costs in the local currency, add the following variable to your `dbt_project.yml` file:
 
@@ -85,7 +94,7 @@ vars:
 **Note**: Unlike cost, conversion values are only available in the local currency. The package will only use the `conversion_value_in_local_currency` field for conversion values, while it may draw from the `cost_in_local_currency` and `cost_in_usd` source fields for cost.
 
 #### Passing Through Additional Metrics
-By default, this package will select `clicks`, `impressions`, `cost` and `conversion_value_in_local_currency` (as well as fields set via `linkedin_ads__conversion_fields` in the next section) from the source reporting tables `ad_analytics_by_campaign` and `ad_analytics_by_creative` to store into the corresponding staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) and transformed (`transform_sql`) if desired, but not required. Only the `name` of each metric field is required. Use the below format for declaring the respective pass-through variables:
+By default, this package will select `clicks`, `impressions`, `cost` and `conversion_value_in_local_currency` (as well as fields set via `linkedin_ads__conversion_fields` in the next section) from the source reporting tables `ad_analytics_by_campaign`, `ad_analytics_by_creative`, `monthly_ad_analytics_by_member_country`, and `monthly_ad_analytics_by_member_region` to store into the corresponding staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) and transformed (`transform_sql`) if desired, but not required. Only the `name` of each metric field is required. Use the below format for declaring the respective pass-through variables:
 
 ```yml
 # dbt_project.yml
@@ -103,12 +112,19 @@ vars:
         - name: "new_custom_field"
           alias: "custom_field"
         - name: "unique_int_field"
+    linkedin_ads__monthly_ad_analytics_by_member_country_passthrough_metrics: # pulls from monthly_ad_analytics_by_member_country
+        - name: "country_custom_field"
+          alias: "country_field"
+    linkedin_ads__monthly_ad_analytics_by_member_region_passthrough_metrics: # pulls from monthly_ad_analytics_by_member_region
+        - name: "region_custom_field"
+          alias: "region_field"
+        - name: "region_field_two"
 ```
 
 >**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (clicks, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package. (**Important**: You do not need to add conversions in this way. See the following section for an alternative implementation.)
 
 #### Adding in Conversion Fields Variable
-Separate from the above passthrough metrics, the package will also include conversion metrics based on the `linkedin_ads__conversion_fields` variable, in addition to the `conversion_value_in_local_currency` field.
+Separate from the above passthrough metrics, the package will also include conversion metrics based on the `linkedin_ads__conversion_fields` variable, in addition to the `conversion_value_in_local_currency` field within the `ad_analytics_by_campaign`, `ad_analytics_by_creative`, `monthly_ad_analytics_by_member_country` and `monthly_ad_analytics_by_member_region` data models.
 
 By default, the data models consider `external_website_conversions` and `one_click_leads` to be conversions. These should cover most use cases, but, say, if you would like to consider landing page clicks and external post click conversions to *also* be conversions, you would apply the following configuration with the **original** source names of the conversion fields (not aliases you provided in the section above):
 

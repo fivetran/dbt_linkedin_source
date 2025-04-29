@@ -19,8 +19,6 @@ dbt deps
 dbt seed --target "$db" --full-refresh
 dbt run --target "$db" --full-refresh
 dbt test --target "$db"
-## UPDATE FOR VARS HERE, IF NO VARS, PLEASE REMOVE
-dbt run --vars '{linkedin_ads__use_local_currency: True}' --target "$db" --full-refresh
+dbt run --vars '{linkedin_ads__use_local_currency: True, linkedin_ads__using_geo: False, linkedin_ads__using_monthly_ad_analytics_by_member_country: False, linkedin_ads__using_monthly_ad_analytics_by_member_region: False}' --target "$db" --full-refresh
 dbt test --target "$db"
-### END VARS CHUNK, REMOVE IF NOT USING
 dbt run-operation fivetran_utils.drop_schemas_automation --target "$db"
