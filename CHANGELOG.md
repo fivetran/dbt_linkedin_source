@@ -1,4 +1,4 @@
-# dbt_linkedin_source v0.11.0
+# dbt_linkedin_source v0.12.0
 
 [PR #75](https://github.com/fivetran/dbt_linkedin_source/pull/75) includes the following updates:
 
