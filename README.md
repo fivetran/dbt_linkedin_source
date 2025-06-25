@@ -20,6 +20,7 @@
 - Materializes [Linkedin Ads Analytics staging tables](https://fivetran.github.io/dbt_linkedin_source/#!/overview/linkedin_source/models/?g_v=1&g_e=seeds) which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/linkedin-ads#schemainformation). These staging tables clean, test, and prepare your Linkedin Ads Analytics data from [Fivetran's connector](https://fivetran.com/docs/applications/linkedin-ads) for analysis by doing the following:
   - Name columns for consistency across all packages and for easier analysis
   - Adds freshness tests to source data
+    > dbt Core >= 1.9.6 is required to run freshness tests out of the box. See other options [here](https://github.com/fivetran/dbt_linkedin_source/blob/main/CHANGELOG.md#breaking-change-for-dbt-core--196).
   - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
 - Generates a comprehensive data dictionary of your Linkedin Ad Analytics data through the [dbt docs site](https://fivetran.github.io/dbt_linkedin_source/).
 - These tables are designed to work simultaneously with our [Linkedin Ads transformation package](https://github.com/fivetran/dbt_linkedin).
@@ -47,7 +48,7 @@ If you  are **not** using the [Linkedin transformation package](https://github.c
 # packages.yml
 packages:
   - package: fivetran/linkedin_source
-    version: [">=0.11.0", "<0.12.0"]
+    version: [">=0.12.0", "<0.13.0"]
 ```
 
 ### Step 3: Define database and schema variables
